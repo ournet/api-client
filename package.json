@@ -1,0 +1,52 @@
+{
+  "name": "@ournet/api-client",
+  "version": "0.1.0",
+  "description": "Ournet api client",
+  "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
+  "scripts": {
+    "pretest": "npm run clean && npm run tsc",
+    "test": "ava --no-cache --verbose lib/**/*.test.js",
+    "posttest": "npm run clean-test-code",
+    "tsc": "tsc",
+    "tscw": "tsc -w",
+    "preversion": "npm run tsc",
+    "postversion": "git push --follow-tags",
+    "prepublishOnly": "npm run tsc && npm run clean-test-code",
+    "clean": "rimraf ./lib && rimraf ./types",
+    "clean-test-code": "rimraf ./lib/**/*.test.js && rimraf ./types/**/*.test.d.ts",
+    "generate-schema": "apollo-codegen introspect-schema http://localhost:41806/graphql --output schema.json",
+    "generate-api": "tsc && node ./lib/scripts/generate-api-app.js",
+    "generate": "yarn generate-schema && yarn generate-api"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ournet/api-client.git"
+  },
+  "keywords": [
+    "ournet",
+    "api-client"
+  ],
+  "author": "Dumitru Cantea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ournet/api-client/issues"
+  },
+  "homepage": "https://github.com/ournet/api-client#readme",
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/node-fetch": "^2.1.1",
+    "apollo-codegen": "^0.19.1",
+    "ava": "^0.23.0",
+    "rimraf": "^2.6.2",
+    "typescript": "latest"
+  },
+  "dependencies": {
+    "@ournet/places-domain": "^0.1.4",
+    "@ournet/weather-domain": "^0.1.4",
+    "node-fetch": "^2.1.2"
+  }
+}
