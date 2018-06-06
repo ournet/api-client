@@ -1,104 +1,212 @@
 
-import { GraphQlQuery, GraphQLQueryExecutor, GraphQLQueryItemInput } from "./graphql-query";
-import { TimezoneGeoPoint } from '@ournet/weather-domain';
+import { GraphQlQuery, GraphQLQueryExecutor, GraphQLQueryItemInput, IDataMapper } from "./graphql-query";
+import { InputTimezoneGeoPoint, ForecastReport, DailyForecastDataPoint, HourlyForecastDataPoint, Place } from './ournet-api-types';
 
 export class OurnetQueryApi<T> extends GraphQlQuery<T, OurnetQueryMethods> {
     constructor(executor: GraphQLQueryExecutor) {
         super(executor, 'query');
     }
-    holidays(key: keyof T, data: GraphQLQueryItemInput, country: string, lang: string, start: number, end: number) {
+    holidays<MR>(key: keyof T,
+        data: GraphQLQueryItemInput,
+        args: { country: string, lang: string, start?: number, end?: number },
+        mapper?: IDataMapper<MR, any>) {
+
         return this.addQueryItem(key,
             {
-                fields: data.fields, name: OurnetQueryMethods.holidays,
-                variables: [{ name: 'country', value: country, type: 'String!' }, { name: 'lang', value: lang, type: 'String!' }, { name: 'start', value: start, type: 'Int' }, { name: 'end', value: end, type: 'Int' }]
+                fields: data.fields,
+                name: OurnetQueryMethods.holidays,
+                mapper: mapper,
+                variables: [
+                    { name: 'country', value: args.country, type: 'String!' },
+                    { name: 'lang', value: args.lang, type: 'String!' },
+                    { name: 'start', value: args.start, type: 'Int' },
+                    { name: 'end', value: args.end, type: 'Int' }
+                ]
             })
     }
 
-    weatherForecastReport(key: keyof T, data: GraphQLQueryItemInput, place: TimezoneGeoPoint) {
+    weatherForecastReport<MR>(key: keyof T,
+        data: GraphQLQueryItemInput,
+        args: { place: InputTimezoneGeoPoint },
+        mapper?: IDataMapper<MR, ForecastReport>) {
+
         return this.addQueryItem(key,
             {
-                fields: data.fields, name: OurnetQueryMethods.weather_forecastReport,
-                variables: [{ name: 'place', value: place, type: 'InputTimezoneGeoPoint!' }]
+                fields: data.fields,
+                name: OurnetQueryMethods.weather_forecastReport,
+                mapper: mapper,
+                variables: [
+                    { name: 'place', value: args.place, type: 'InputTimezoneGeoPoint!' }
+                ]
             })
     }
 
-    weatherDatePlacesForecast(key: keyof T, data: GraphQLQueryItemInput, places: null[], date: number) {
+    weatherDatePlacesForecast<MR>(key: keyof T,
+        data: GraphQLQueryItemInput,
+        args: { places: InputTimezoneGeoPoint[], date: number },
+        mapper?: IDataMapper<MR, DailyForecastDataPoint[]>) {
+
         return this.addQueryItem(key,
             {
-                fields: data.fields, name: OurnetQueryMethods.weather_datePlacesForecast,
-                variables: [{ name: 'places', value: places, type: 'null!' }, { name: 'date', value: date, type: 'Int!' }]
+                fields: data.fields,
+                name: OurnetQueryMethods.weather_datePlacesForecast,
+                mapper: mapper,
+                variables: [
+                    { name: 'places', value: args.places, type: '[InputTimezoneGeoPoint]!' },
+                    { name: 'date', value: args.date, type: 'Int!' }
+                ]
             })
     }
 
-    weatherNowPlaceForecast(key: keyof T, data: GraphQLQueryItemInput, place: TimezoneGeoPoint) {
+    weatherNowPlaceForecast<MR>(key: keyof T,
+        data: GraphQLQueryItemInput,
+        args: { place: InputTimezoneGeoPoint },
+        mapper?: IDataMapper<MR, HourlyForecastDataPoint>) {
+
         return this.addQueryItem(key,
             {
-                fields: data.fields, name: OurnetQueryMethods.weather_nowPlaceForecast,
-                variables: [{ name: 'place', value: place, type: 'InputTimezoneGeoPoint!' }]
+                fields: data.fields,
+                name: OurnetQueryMethods.weather_nowPlaceForecast,
+                mapper: mapper,
+                variables: [
+                    { name: 'place', value: args.place, type: 'InputTimezoneGeoPoint!' }
+                ]
             })
     }
 
-    placesPlaceById(key: keyof T, data: GraphQLQueryItemInput, id: number) {
+    placesPlaceById<MR>(key: keyof T,
+        data: GraphQLQueryItemInput,
+        args: { id: number },
+        mapper?: IDataMapper<MR, Place>) {
+
         return this.addQueryItem(key,
             {
-                fields: data.fields, name: OurnetQueryMethods.places_placeById,
-                variables: [{ name: 'id', value: id, type: 'Int!' }]
+                fields: data.fields,
+                name: OurnetQueryMethods.places_placeById,
+                mapper: mapper,
+                variables: [
+                    { name: 'id', value: args.id, type: 'Int!' }
+                ]
             })
     }
 
-    placesSearchPlace(key: keyof T, data: GraphQLQueryItemInput, query: string, country: string, limit: number, searchType: string) {
+    placesSearchPlace<MR>(key: keyof T,
+        data: GraphQLQueryItemInput,
+        args: { query: string, country: string, limit: number, searchType?: string },
+        mapper?: IDataMapper<MR, Place[]>) {
+
         return this.addQueryItem(key,
             {
-                fields: data.fields, name: OurnetQueryMethods.places_searchPlace,
-                variables: [{ name: 'query', value: query, type: 'String!' }, { name: 'country', value: country, type: 'String!' }, { name: 'limit', value: limit, type: 'Int!' }, { name: 'searchType', value: searchType, type: 'String' }]
+                fields: data.fields,
+                name: OurnetQueryMethods.places_searchPlace,
+                mapper: mapper,
+                variables: [
+                    { name: 'query', value: args.query, type: 'String!' },
+                    { name: 'country', value: args.country, type: 'String!' },
+                    { name: 'limit', value: args.limit, type: 'Int!' },
+                    { name: 'searchType', value: args.searchType, type: 'String' }
+                ]
             })
     }
 
-    placesPlacesByIds(key: keyof T, data: GraphQLQueryItemInput, ids: null[]) {
+    placesPlacesByIds<MR>(key: keyof T,
+        data: GraphQLQueryItemInput,
+        args: { ids: number[] },
+        mapper?: IDataMapper<MR, Place[]>) {
+
         return this.addQueryItem(key,
             {
-                fields: data.fields, name: OurnetQueryMethods.places_placesByIds,
-                variables: [{ name: 'ids', value: ids, type: 'null!' }]
+                fields: data.fields,
+                name: OurnetQueryMethods.places_placesByIds,
+                mapper: mapper,
+                variables: [
+                    { name: 'ids', value: args.ids, type: '[Int]!' }
+                ]
             })
     }
 
-    placesPlacesByAdmin1Code(key: keyof T, data: GraphQLQueryItemInput, country: string, admin1Code: string, limit: number) {
+    placesPlacesByAdmin1Code<MR>(key: keyof T,
+        data: GraphQLQueryItemInput,
+        args: { country: string, admin1Code: string, limit: number },
+        mapper?: IDataMapper<MR, Place[]>) {
+
         return this.addQueryItem(key,
             {
-                fields: data.fields, name: OurnetQueryMethods.places_placesByAdmin1Code,
-                variables: [{ name: 'country', value: country, type: 'String!' }, { name: 'admin1Code', value: admin1Code, type: 'String!' }, { name: 'limit', value: limit, type: 'Int!' }]
+                fields: data.fields,
+                name: OurnetQueryMethods.places_placesByAdmin1Code,
+                mapper: mapper,
+                variables: [
+                    { name: 'country', value: args.country, type: 'String!' },
+                    { name: 'admin1Code', value: args.admin1Code, type: 'String!' },
+                    { name: 'limit', value: args.limit, type: 'Int!' }
+                ]
             })
     }
 
-    placesMainPlaces(key: keyof T, data: GraphQLQueryItemInput, country: string, limit: number) {
+    placesMainPlaces<MR>(key: keyof T,
+        data: GraphQLQueryItemInput,
+        args: { country: string, limit: number },
+        mapper?: IDataMapper<MR, Place[]>) {
+
         return this.addQueryItem(key,
             {
-                fields: data.fields, name: OurnetQueryMethods.places_mainPlaces,
-                variables: [{ name: 'country', value: country, type: 'String!' }, { name: 'limit', value: limit, type: 'Int!' }]
+                fields: data.fields,
+                name: OurnetQueryMethods.places_mainPlaces,
+                mapper: mapper,
+                variables: [
+                    { name: 'country', value: args.country, type: 'String!' },
+                    { name: 'limit', value: args.limit, type: 'Int!' }
+                ]
             })
     }
 
-    placesAdmin1s(key: keyof T, data: GraphQLQueryItemInput, country: string, limit: number) {
+    placesAdmin1s<MR>(key: keyof T,
+        data: GraphQLQueryItemInput,
+        args: { country: string, limit: number },
+        mapper?: IDataMapper<MR, Place[]>) {
+
         return this.addQueryItem(key,
             {
-                fields: data.fields, name: OurnetQueryMethods.places_admin1s,
-                variables: [{ name: 'country', value: country, type: 'String!' }, { name: 'limit', value: limit, type: 'Int!' }]
+                fields: data.fields,
+                name: OurnetQueryMethods.places_admin1s,
+                mapper: mapper,
+                variables: [
+                    { name: 'country', value: args.country, type: 'String!' },
+                    { name: 'limit', value: args.limit, type: 'Int!' }
+                ]
             })
     }
 
-    placesAdmin1(key: keyof T, data: GraphQLQueryItemInput, admin1Code: string, country: string) {
+    placesAdmin1<MR>(key: keyof T,
+        data: GraphQLQueryItemInput,
+        args: { admin1Code: string, country: string },
+        mapper?: IDataMapper<MR, Place>) {
+
         return this.addQueryItem(key,
             {
-                fields: data.fields, name: OurnetQueryMethods.places_admin1,
-                variables: [{ name: 'admin1Code', value: admin1Code, type: 'String!' }, { name: 'country', value: country, type: 'String!' }]
+                fields: data.fields,
+                name: OurnetQueryMethods.places_admin1,
+                mapper: mapper,
+                variables: [
+                    { name: 'admin1Code', value: args.admin1Code, type: 'String!' },
+                    { name: 'country', value: args.country, type: 'String!' }
+                ]
             })
     }
 
-    placesPlaceOldId(key: keyof T, data: GraphQLQueryItemInput, int: number) {
+    placesPlaceOldId<MR>(key: keyof T,
+        data: GraphQLQueryItemInput,
+        args: { int: number },
+        mapper?: IDataMapper<MR, number>) {
+
         return this.addQueryItem(key,
             {
-                fields: data.fields, name: OurnetQueryMethods.places_placeOldId,
-                variables: [{ name: 'int', value: int, type: 'Int!' }]
+                fields: data.fields,
+                name: OurnetQueryMethods.places_placeOldId,
+                mapper: mapper,
+                variables: [
+                    { name: 'int', value: args.int, type: 'Int!' }
+                ]
             })
     }
 }

@@ -2,10 +2,15 @@
 import fetch from 'node-fetch';
 import { Index } from './utils';
 
+export interface IDataMapper<R=any, V=any> {
+    (value: V): R
+}
+
 export type GraphQLQueryItem<NT extends string> = {
     name: NT
     fields: string
     variables?: { type?: string, name: string, value: any, varName?: string }[]
+    mapper?: IDataMapper
 }
 
 export type GraphQLQueryItemInput = {
