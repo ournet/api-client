@@ -17,8 +17,8 @@ export type GraphQLQueryItemInput = {
     fields: string
 }
 
-export type GraphQLRequestResult = {
-    data: any
+export type GraphQLRequestResult<T={}> = {
+    data: T
     error?: Error[]
 }
 
@@ -30,7 +30,7 @@ export type GraphQLQueryExecutorData = {
 export class GraphQLQueryExecutor {
     constructor(private url: string, private headers: Index<string> = { 'Content-Type': 'application/json' }) { }
 
-    execute(data: GraphQLQueryExecutorData): Promise<GraphQLRequestResult> {
+    execute<T>(data: GraphQLQueryExecutorData): Promise<GraphQLRequestResult<T>> {
         console.log(`executing url ${this.url}`);
         console.log(`executing data ${JSON.stringify(data)}`);
         return fetch(this.url, {
@@ -82,9 +82,17 @@ export class GraphQlQuery<T extends {}, NT extends string> {
         return { query, variables };
     }
 
-    execute() {
+    async execute(): Promise<GraphQLRequestResult<T>> {
         const queryData = this.formatQueryData();
-        return this.executor.execute(queryData);
+        const result = await this.executor.execute<T>(queryData);
+        const keys = Object.keys(this.items);
+        for (let key of keys) {
+            if (this.items[key].mapper) {
+                (<any>result.data)[key] = this.items[key].mapper((<any>result.data)[key]);
+            }
+        }
+
+        return result;
     }
 }
 
