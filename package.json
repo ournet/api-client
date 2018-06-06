@@ -18,7 +18,7 @@
     "generate-schema": "apollo-codegen introspect-schema http://localhost:41806/graphql --output schema.json",
     "generate-types": "tsc && node ./lib/scripts/generate-types.js",
     "generate-api": "tsc && node ./lib/scripts/generate-api.js",
-    "generate": "yarn generate-schema && yarn generate-api"
+    "generate": "yarn generate-schema && yarn generate-types && yarn generate-api && yarn clean && yarn tsc"
   },
   "engines": {
     "node": ">=4.0.0"
