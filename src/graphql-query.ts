@@ -31,8 +31,8 @@ export class GraphQLQueryExecutor {
     constructor(private url: string, private headers: Index<string> = { 'Content-Type': 'application/json' }) { }
 
     execute<T>(data: GraphQLQueryExecutorData): Promise<GraphQLRequestResult<T>> {
-        console.log(`executing url ${this.url}`);
-        console.log(`executing data ${JSON.stringify(data)}`);
+        // console.log(`executing url ${this.url}`);
+        // console.log(`executing data ${JSON.stringify(data)}`);
         return fetch(this.url, {
             method: 'POST',
             headers: this.headers,
