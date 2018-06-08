@@ -17,3 +17,23 @@ export type DailyForecastDataPoint = { cloudCover?: number, dewPoint?: number, h
 export type Place = { id: number, name: string, asciiname?: string, names?: string, latitude: number, longitude: number, featureClass?: string, featureCode?: string, countryCode?: string, admin1Code?: string, admin2Code?: string, admin3Code?: string, population?: number, elevation?: number, dem?: number, timezone?: string, admin1?: Place } 
 
 export type PlaceOldId = { id: number, geonameid: number } 
+
+export const InputTimezoneGeoPointStringFields = 'longitude latitude timezone';
+
+export const ForecastReportStringFields = 'latitude longitude timezone units hourly { icon night data { cloudCover dewPoint humidity icon night ozone precipAccumulation precipIntensity precipProbability precipType pressure temperature time uvIndex visibility windBearing windGust windSpeed } } details { icon night data { cloudCover dewPoint humidity icon night ozone precipAccumulation precipIntensity precipProbability precipType pressure temperature time uvIndex visibility windBearing windGust windSpeed temperatureHigh temperatureHighTime temperatureLow temperatureLowTime } } daily { icon night data { cloudCover dewPoint humidity icon night ozone precipAccumulation precipIntensity precipProbability precipType pressure temperature time uvIndex visibility windBearing windGust windSpeed temperatureHigh temperatureHighTime temperatureLow temperatureLowTime moonPhase sunriseTime sunsetTime } }';
+
+export const HourlyForecastDataBlockStringFields = 'icon night data { cloudCover dewPoint humidity icon night ozone precipAccumulation precipIntensity precipProbability precipType pressure temperature time uvIndex visibility windBearing windGust windSpeed }';
+
+export const HourlyForecastDataPointStringFields = 'cloudCover dewPoint humidity icon night ozone precipAccumulation precipIntensity precipProbability precipType pressure temperature time uvIndex visibility windBearing windGust windSpeed';
+
+export const HoursForecastDataBlockStringFields = 'icon night data { cloudCover dewPoint humidity icon night ozone precipAccumulation precipIntensity precipProbability precipType pressure temperature time uvIndex visibility windBearing windGust windSpeed temperatureHigh temperatureHighTime temperatureLow temperatureLowTime }';
+
+export const HoursForecastDataPointStringFields = 'cloudCover dewPoint humidity icon night ozone precipAccumulation precipIntensity precipProbability precipType pressure temperature time uvIndex visibility windBearing windGust windSpeed temperatureHigh temperatureHighTime temperatureLow temperatureLowTime';
+
+export const DailyForecastDataBlockStringFields = 'icon night data { cloudCover dewPoint humidity icon night ozone precipAccumulation precipIntensity precipProbability precipType pressure temperature time uvIndex visibility windBearing windGust windSpeed temperatureHigh temperatureHighTime temperatureLow temperatureLowTime moonPhase sunriseTime sunsetTime }';
+
+export const DailyForecastDataPointStringFields = 'cloudCover dewPoint humidity icon night ozone precipAccumulation precipIntensity precipProbability precipType pressure temperature time uvIndex visibility windBearing windGust windSpeed temperatureHigh temperatureHighTime temperatureLow temperatureLowTime moonPhase sunriseTime sunsetTime';
+
+export const PlaceStringFields = 'id name asciiname names latitude longitude featureClass featureCode countryCode admin1Code admin2Code admin3Code population elevation dem timezone admin1 { id name asciiname names latitude longitude featureClass featureCode countryCode admin1Code admin2Code admin3Code population elevation dem timezone }';
+
+export const PlaceOldIdStringFields = 'id geonameid';
