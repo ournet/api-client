@@ -1,3 +1,5 @@
+export type PublicHoliday = { date: number, name: string } 
+
 export type InputTimezoneGeoPoint = { longitude: number, latitude: number, timezone: string } 
 
 export type ForecastReport = { latitude: number, longitude: number, timezone: string, units: string, hourly?: HourlyForecastDataBlock, details?: HoursForecastDataBlock, daily?: DailyForecastDataBlock } 
@@ -17,6 +19,8 @@ export type DailyForecastDataPoint = { cloudCover?: number, dewPoint?: number, h
 export type Place = { id: number, name: string, asciiname?: string, names?: string, latitude: number, longitude: number, featureClass?: string, featureCode?: string, countryCode?: string, admin1Code?: string, admin2Code?: string, admin3Code?: string, population?: number, elevation?: number, dem?: number, timezone?: string, admin1?: Place } 
 
 export type PlaceOldId = { id: number, geonameid: number } 
+
+export const PublicHolidayStringFields = 'date name';
 
 export const InputTimezoneGeoPointStringFields = 'longitude latitude timezone';
 
