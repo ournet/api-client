@@ -8,10 +8,10 @@ export function generate() {
 
 function generateTypes(): GeneratedInfo {
     const schema = getSchema();
-    const names = (<any[]>schema.data.__schema.types).map<TypeData>((t: any) => getTypeByName(t.name))
+    const typeNames = (<any[]>schema.data.__schema.types).map<TypeData>((t: any) => getTypeByName(t.name))
         .filter(type => typeIsObject(type));
 
-    const types = names.map(name => getTypeByName(name.name));
+    const types = typeNames.map(name => getTypeByName(name.name));
 
     let data = types
         .map(item => ({

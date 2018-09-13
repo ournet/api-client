@@ -19,7 +19,7 @@ export type GraphQLQueryItemInput = {
 
 export type GraphQLRequestResult<T={}> = {
     data: T
-    error?: Error[]
+    errors?: Error[]
 }
 
 export type GraphQLQueryExecutorData = {
@@ -48,7 +48,7 @@ export class GraphQlQuery<T extends {}, NT extends string> {
     constructor(private executor: GraphQLQueryExecutor, private type: 'query' | 'mutation') { }
 
     protected addQueryItem(key: keyof T, item: GraphQLQueryItem<NT>) {
-        this.items[key] = item;
+        (<any>this.items)[key] = item;
         return this;
     }
 
