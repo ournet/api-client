@@ -58,7 +58,7 @@ mapper?:IDataMapper<MR, ForecastReport>) {
 
 weatherDatePlacesForecast<MR>(key:keyof T,
 data:GraphQLQueryItemInput,
-args:{ places: InputTimezoneGeoPoint[], date: number } ,
+args:{ places: InputTimezoneGeoPoint[], date: string } ,
 mapper?:IDataMapper<MR, DailyForecastDataPoint[]>) {
         
         return this.addQueryItem(key,
@@ -68,7 +68,7 @@ mapper?:IDataMapper<MR, DailyForecastDataPoint[]>) {
                 mapper: mapper,
                 variables: [
                     { name: 'places', value: args.places, type: '[InputTimezoneGeoPoint]!' },
-{ name: 'date', value: args.date, type: 'Int!' }
+{ name: 'date', value: args.date, type: 'String!' }
                 ]
             })
     }
