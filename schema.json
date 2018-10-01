@@ -272,7 +272,7 @@
                   "defaultValue": null
                 },
                 {
-                  "name": "searchType",
+                  "name": "type",
                   "description": "",
                   "type": {
                     "kind": "SCALAR",

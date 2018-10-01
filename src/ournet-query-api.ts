@@ -107,7 +107,7 @@ mapper?:IDataMapper<MR, Place>) {
 
 placesSearchPlace<MR>(key:keyof T,
 data:GraphQLQueryItemInput,
-args:{ query: string, country: string, limit: number, searchType?: string } ,
+args:{ query: string, country: string, limit: number, type?: string } ,
 mapper?:IDataMapper<MR, Place[]>) {
         
         return this.addQueryItem(key,
@@ -119,7 +119,7 @@ mapper?:IDataMapper<MR, Place[]>) {
                     { name: 'query', value: args.query, type: 'String!' },
 { name: 'country', value: args.country, type: 'String!' },
 { name: 'limit', value: args.limit, type: 'Int!' },
-{ name: 'searchType', value: args.searchType, type: 'String' }
+{ name: 'type', value: args.type, type: 'String' }
                 ]
             })
     }
