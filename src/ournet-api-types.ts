@@ -18,6 +18,8 @@ export type DailyForecastDataPoint = { cloudCover?: number, dewPoint?: number, h
 
 export type Place = { id: string, name: string, asciiname: string, names?: string, latitude: number, longitude: number, featureClass: string, featureCode?: string, countryCode: string, admin1Code: string, admin2Code?: string, admin3Code?: string, population?: number, elevation?: number, dem?: number, timezone: string, admin1?: Place } 
 
+export type PlaceOldId = { id: number, geonameid: number } 
+
 export type NewsItem = { id: string, title: string, summary: string, lang: string, country: string, urlPath: string, urlHost: string, slug: string, sourceId: string, imagesIds?: string[], videoId?: string, topics?: NewsTopic[], eventId?: string, createdAt: string, updatedAt?: string, publishedAt: string, expiresAt: number, titleHash: string, hasContent: boolean, countViews: number, countQuotes: number, quotesIds?: string[] } 
 
 export type NewsTopic = { id: string, name: string, slug: string, abbr?: string, type?: string } 
@@ -86,8 +88,6 @@ export type CountQuotesByAuthorQueryParams = { lang: string, country: string, ma
 
 export type QuoteTopItem = { id: string, count: number } 
 
-export type PlaceOldId = { id: number, geonameid: number } 
-
 export type ArticleContentRef = { refId: string, refType: string } 
 
 export const PublicHolidayStringFields = 'date name';
@@ -109,6 +109,8 @@ export const DailyForecastDataBlockStringFields = 'icon night data { cloudCover 
 export const DailyForecastDataPointStringFields = 'cloudCover dewPoint humidity icon night ozone precipAccumulation precipIntensity precipProbability precipType pressure temperature time uvIndex visibility windDir windGust windSpeed temperatureHigh temperatureHighTime temperatureLow temperatureLowTime moonPhase sunriseTime sunsetTime';
 
 export const PlaceStringFields = 'id name asciiname names latitude longitude featureClass featureCode countryCode admin1Code admin2Code admin3Code population elevation dem timezone admin1 { id name asciiname names latitude longitude featureClass featureCode countryCode admin1Code admin2Code admin3Code population elevation dem timezone }';
+
+export const PlaceOldIdStringFields = 'id geonameid';
 
 export const NewsItemStringFields = 'id title summary lang country urlPath urlHost slug sourceId imagesIds videoId topics { id name slug abbr type } eventId createdAt updatedAt publishedAt expiresAt titleHash hasContent countViews countQuotes quotesIds';
 
@@ -177,7 +179,5 @@ export const CountQuotesByTopicQueryParamsStringFields = 'lang country maxDate m
 export const CountQuotesByAuthorQueryParamsStringFields = 'lang country maxDate minDate authorId';
 
 export const QuoteTopItemStringFields = 'id count';
-
-export const PlaceOldIdStringFields = 'id geonameid';
 
 export const ArticleContentRefStringFields = 'refId refType';

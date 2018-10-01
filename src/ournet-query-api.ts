@@ -1,6 +1,6 @@
 
 import { GraphQlQuery, GraphQLQueryExecutor, GraphQLQueryItemInput, IDataMapper } from "./graphql-query";
-import { PublicHoliday, InputTimezoneGeoPoint, ForecastReport, DailyForecastDataPoint, HourlyForecastDataPoint, Place, NewsItem, NewsSearchParams, LatestNewsQueryParams, LatestNewsBySourceQueryParams, LatestNewsByTopicQueryParams, LatestNewsByEventQueryParams, CountNewsQueryParams, CountNewsBySourceQueryParams, CountNewsByTopicQueryParams, CountNewsByEventQueryParams, NewsTopItem, NewsEvent, LatestEventsQueryParams, LatestEventsByTopicQueryParams, CountEventsQueryParams, CountEventsByTopicQueryParams, TrendingTopicsQueryParams, ArticleContent, Topic, TopicWikiId, Quote, LatestQuotesQueryParams, LatestQuotesByTopicQueryParams, LatestQuotesByAuthorQueryParams, CountQuotesQueryParams, CountQuotesByTopicQueryParams, CountQuotesByAuthorQueryParams, QuoteTopItem } from './ournet-api-types';
+import { PublicHoliday, InputTimezoneGeoPoint, ForecastReport, DailyForecastDataPoint, HourlyForecastDataPoint, Place, PlaceOldId, NewsItem, NewsSearchParams, LatestNewsQueryParams, LatestNewsBySourceQueryParams, LatestNewsByTopicQueryParams, LatestNewsByEventQueryParams, CountNewsQueryParams, CountNewsBySourceQueryParams, CountNewsByTopicQueryParams, CountNewsByEventQueryParams, NewsTopItem, NewsEvent, LatestEventsQueryParams, LatestEventsByTopicQueryParams, CountEventsQueryParams, CountEventsByTopicQueryParams, TrendingTopicsQueryParams, ArticleContent, Topic, TopicWikiId, Quote, LatestQuotesQueryParams, LatestQuotesByTopicQueryParams, LatestQuotesByAuthorQueryParams, CountQuotesQueryParams, CountQuotesByTopicQueryParams, CountQuotesByAuthorQueryParams, QuoteTopItem } from './ournet-api-types';
 
 export class OurnetQueryApi<T> extends GraphQlQuery<T, OurnetQueryMethods> {
     constructor(executor: GraphQLQueryExecutor) {
@@ -211,8 +211,8 @@ mapper?:IDataMapper<MR, Place>) {
 
 placesPlaceOldId<MR>(key:keyof T,
 data:GraphQLQueryItemInput,
-args:{ int: number } ,
-mapper?:IDataMapper<MR, number>) {
+args:{ id: number } ,
+mapper?:IDataMapper<MR, PlaceOldId>) {
         
         return this.addQueryItem(key,
             {
@@ -220,7 +220,7 @@ mapper?:IDataMapper<MR, number>) {
                 name: OurnetQueryMethods.places_placeOldId,
                 mapper: mapper,
                 variables: [
-                    { name: 'int', value: args.int, type: 'Int!' }
+                    { name: 'id', value: args.id, type: 'Int!' }
                 ]
             })
     }
