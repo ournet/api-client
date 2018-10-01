@@ -2252,12 +2252,12 @@
               "deprecationReason": null
             },
             {
-              "name": "windBearing",
+              "name": "windDir",
               "description": "",
               "args": [],
               "type": {
                 "kind": "SCALAR",
-                "name": "Float",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -2497,12 +2497,12 @@
               "deprecationReason": null
             },
             {
-              "name": "windBearing",
+              "name": "windDir",
               "description": "",
               "args": [],
               "type": {
                 "kind": "SCALAR",
-                "name": "Float",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -2817,12 +2817,12 @@
               "deprecationReason": null
             },
             {
-              "name": "windBearing",
+              "name": "windDir",
               "description": "",
               "args": [],
               "type": {
                 "kind": "SCALAR",
-                "name": "Float",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -3175,12 +3175,12 @@
               "deprecationReason": null
             },
             {
-              "name": "windBearing",
+              "name": "windDir",
               "description": "",
               "args": [],
               "type": {
                 "kind": "SCALAR",
-                "name": "Float",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
