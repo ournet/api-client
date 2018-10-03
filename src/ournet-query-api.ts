@@ -1,6 +1,6 @@
 
 import { GraphQlQuery, GraphQLQueryExecutor, GraphQLQueryItemInput, IDataMapper } from "./graphql-query";
-import { PublicHoliday, InputTimezoneGeoPoint, ForecastReport, DailyForecastDataPoint, HourlyForecastDataPoint, Place, PlaceOldId, NewsItem, NewsSearchParams, LatestNewsQueryParams, LatestNewsBySourceQueryParams, LatestNewsByTopicQueryParams, LatestNewsByEventQueryParams, CountNewsQueryParams, CountNewsBySourceQueryParams, CountNewsByTopicQueryParams, CountNewsByEventQueryParams, NewsTopItem, NewsEvent, LatestEventsQueryParams, LatestEventsByTopicQueryParams, CountEventsQueryParams, CountEventsByTopicQueryParams, TrendingTopicsQueryParams, ArticleContent, Topic, TopicWikiId, Quote, LatestQuotesQueryParams, LatestQuotesByTopicQueryParams, LatestQuotesByAuthorQueryParams, CountQuotesQueryParams, CountQuotesByTopicQueryParams, CountQuotesByAuthorQueryParams, QuoteTopItem } from './ournet-api-types';
+import { PublicHoliday, InputTimezoneGeoPoint, ForecastReport, DailyForecastDataPoint, HourlyForecastDataPoint, Place, PlaceOldId, NewsItem, NewsSearchParams, LatestNewsQueryParams, LatestNewsBySourceQueryParams, LatestNewsByTopicQueryParams, LatestNewsByEventQueryParams, CountNewsQueryParams, CountNewsBySourceQueryParams, CountNewsByTopicQueryParams, CountNewsByEventQueryParams, NewsTopItem, NewsEvent, LatestEventsQueryParams, LatestEventsByTopicQueryParams, CountEventsQueryParams, CountEventsByTopicQueryParams, TrendingTopicsQueryParams, ArticleContent, Topic, TopicWikiId, Quote, LatestQuotesQueryParams, LatestQuotesByTopicQueryParams, LatestQuotesByAuthorQueryParams, CountQuotesQueryParams, CountQuotesByTopicQueryParams, CountQuotesByAuthorQueryParams, QuoteTopItem, HoroscopeReport, HoroscopeRandomPhrasesQueryParams, HoroscopePhrase } from './ournet-api-types';
 
 export class OurnetQueryApi<T> extends GraphQlQuery<T, OurnetQueryMethods> {
     constructor(executor: GraphQLQueryExecutor) {
@@ -659,7 +659,7 @@ mapper?:IDataMapper<MR, Quote>) {
 
 quotesQuotesByIds<MR>(key:keyof T,
 data:GraphQLQueryItemInput,
-args:{ ids: string } ,
+args:{ ids: string[] } ,
 mapper?:IDataMapper<MR, Quote[]>) {
         
         return this.addQueryItem(key,
@@ -668,7 +668,7 @@ mapper?:IDataMapper<MR, Quote[]>) {
                 name: OurnetQueryMethods.quotes_quotesByIds,
                 mapper: mapper,
                 variables: [
-                    { name: 'ids', value: args.ids, type: 'String!' }
+                    { name: 'ids', value: args.ids, type: '[String]!' }
                 ]
             })
     }
@@ -816,6 +816,70 @@ mapper?:IDataMapper<MR, QuoteTopItem[]>) {
                 ]
             })
     }
+
+horoscopesReportById<MR>(key:keyof T,
+data:GraphQLQueryItemInput,
+args:{ id: string } ,
+mapper?:IDataMapper<MR, HoroscopeReport>) {
+        
+        return this.addQueryItem(key,
+            {
+                fields: data.fields,
+                name: OurnetQueryMethods.horoscopes_reportById,
+                mapper: mapper,
+                variables: [
+                    { name: 'id', value: args.id, type: 'String!' }
+                ]
+            })
+    }
+
+horoscopesReportsByIds<MR>(key:keyof T,
+data:GraphQLQueryItemInput,
+args:{ ids: string[] } ,
+mapper?:IDataMapper<MR, HoroscopeReport[]>) {
+        
+        return this.addQueryItem(key,
+            {
+                fields: data.fields,
+                name: OurnetQueryMethods.horoscopes_reportsByIds,
+                mapper: mapper,
+                variables: [
+                    { name: 'ids', value: args.ids, type: '[String]!' }
+                ]
+            })
+    }
+
+horoscopesRandomPhrases<MR>(key:keyof T,
+data:GraphQLQueryItemInput,
+args:{ params?: HoroscopeRandomPhrasesQueryParams } ,
+mapper?:IDataMapper<MR, HoroscopePhrase[]>) {
+        
+        return this.addQueryItem(key,
+            {
+                fields: data.fields,
+                name: OurnetQueryMethods.horoscopes_randomPhrases,
+                mapper: mapper,
+                variables: [
+                    { name: 'params', value: args.params, type: 'HoroscopeRandomPhrasesQueryParams' }
+                ]
+            })
+    }
+
+horoscopesPhraseById<MR>(key:keyof T,
+data:GraphQLQueryItemInput,
+args:{ id: string } ,
+mapper?:IDataMapper<MR, HoroscopePhrase>) {
+        
+        return this.addQueryItem(key,
+            {
+                fields: data.fields,
+                name: OurnetQueryMethods.horoscopes_phraseById,
+                mapper: mapper,
+                variables: [
+                    { name: 'id', value: args.id, type: 'String!' }
+                ]
+            })
+    }
 }
     
 
@@ -869,5 +933,9 @@ export enum OurnetQueryMethods {
     quotes_countByAuthor = "quotes_countByAuthor",
     quotes_topTopics = "quotes_topTopics",
     quotes_topAuthors = "quotes_topAuthors",
-    quotes_topAuthorTopics = "quotes_topAuthorTopics"
+    quotes_topAuthorTopics = "quotes_topAuthorTopics",
+    horoscopes_reportById = "horoscopes_reportById",
+    horoscopes_reportsByIds = "horoscopes_reportsByIds",
+    horoscopes_randomPhrases = "horoscopes_randomPhrases",
+    horoscopes_phraseById = "horoscopes_phraseById"
 }
