@@ -668,7 +668,7 @@ mapper?:IDataMapper<MR, Quote[]>) {
                 name: OurnetQueryMethods.quotes_quotesByIds,
                 mapper: mapper,
                 variables: [
-                    { name: 'ids', value: args.ids, type: '[String]!' }
+                    { name: 'ids', value: args.ids, type: '[String!]!' }
                 ]
             })
     }
@@ -844,7 +844,7 @@ mapper?:IDataMapper<MR, HoroscopeReport[]>) {
                 name: OurnetQueryMethods.horoscopes_reportsByIds,
                 mapper: mapper,
                 variables: [
-                    { name: 'ids', value: args.ids, type: '[String]!' }
+                    { name: 'ids', value: args.ids, type: '[String!]!' }
                 ]
             })
     }

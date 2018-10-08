@@ -54,6 +54,9 @@ function generateApi(action: ActionType) {
         const variables = field.args.map(arg => {
             let typeName = getTypeName(arg.type);
             if (typeIsList(arg.type)) {
+                if (arg.type.ofType && arg.type.ofType.ofType && typeIsRequired(arg.type.ofType.ofType)) {
+                    typeName += '!';
+                }
                 typeName = `[${typeName}]`;
             }
             if (typeIsRequired(arg.type)) {

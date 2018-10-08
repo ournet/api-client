@@ -88,9 +88,11 @@ export type CountQuotesByAuthorQueryParams = { lang: string, country: string, ma
 
 export type QuoteTopItem = { id: string, count: number } 
 
-export type HoroscopeReport = { id: string, lang: string, text: string, length: number, sign: number, period: string, phrasesIds: string[], createdAt: string, expiresAt: number } 
+export type HoroscopeReport = { id: string, lang: string, text: string, length: number, sign: number, period: string, phrasesIds: string[], numbers: number[], stats: HoroscopeReportStats, createdAt: string, expiresAt: number } 
 
-export type HoroscopeRandomPhrasesQueryParams = { lang: string, limit: number, sign: string, period: string } 
+export type HoroscopeReportStats = { love: number, success: number, health: number } 
+
+export type HoroscopeRandomPhrasesQueryParams = { lang: string, limit: number, sign: number, period: string } 
 
 export type HoroscopePhrase = { id: string, lang: string, source: string, text: string, length: number, sign: number, period: string, createdAt: string } 
 
@@ -186,7 +188,9 @@ export const CountQuotesByAuthorQueryParamsStringFields = 'lang country maxDate 
 
 export const QuoteTopItemStringFields = 'id count';
 
-export const HoroscopeReportStringFields = 'id lang text length sign period phrasesIds createdAt expiresAt';
+export const HoroscopeReportStringFields = 'id lang text length sign period phrasesIds numbers stats { love success health } createdAt expiresAt';
+
+export const HoroscopeReportStatsStringFields = 'love success health';
 
 export const HoroscopeRandomPhrasesQueryParamsStringFields = 'lang limit sign period';
 

@@ -1,4 +1,5 @@
-// const debug = require('debug')('ournet.web.weather');
+const debug = require('debug')('ournet:api-client');
+
 import fetch from 'node-fetch';
 import { Index } from './utils';
 
@@ -31,8 +32,8 @@ export class GraphQLQueryExecutor {
     constructor(private url: string, private headers: Index<string> = { 'Content-Type': 'application/json' }) { }
 
     execute<T>(data: GraphQLQueryExecutorData): Promise<GraphQLRequestResult<T>> {
-        // console.log(`executing url ${this.url}`);
-        // console.log(`executing data ${JSON.stringify(data)}`);
+        debug(`executing url ${this.url}`);
+        debug(`executing data ${JSON.stringify(data)}`);
         return fetch(this.url, {
             method: 'POST',
             headers: this.headers,
