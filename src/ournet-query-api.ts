@@ -611,7 +611,7 @@ mapper?:IDataMapper<MR, Topic>) {
 
 topicsTopicsByIds<MR>(key:keyof T,
 data:GraphQLQueryItemInput,
-args:{ ids: string } ,
+args:{ ids: string[] } ,
 mapper?:IDataMapper<MR, Topic[]>) {
         
         return this.addQueryItem(key,
@@ -620,7 +620,7 @@ mapper?:IDataMapper<MR, Topic[]>) {
                 name: OurnetQueryMethods.topics_topicsByIds,
                 mapper: mapper,
                 variables: [
-                    { name: 'ids', value: args.ids, type: 'String!' }
+                    { name: 'ids', value: args.ids, type: '[String]!' }
                 ]
             })
     }
