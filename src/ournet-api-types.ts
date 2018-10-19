@@ -60,6 +60,8 @@ export type CountEventsByTopicQueryParams = { lang: string, country: string, min
 
 export type TrendingTopicsQueryParams = { lang: string, country: string, limit: number, period: string } 
 
+export type SimilarEventsByTopicsQueryParams = { lang: string, country: string, minDate?: string, maxDate?: string, limit: number, topicIds: string[], exceptId?: string } 
+
 export type ArticleContent = { id: string, refId: string, refType: string, content: string, format: string, formatVersion?: number, topicsMap?: any, expiresAt: number, createdAt: string, updatedAt?: string } 
 
 export type Topic = { id: string, lang: string, country: string, wikiId?: string, name: string, commonName?: string, englishName?: string, abbr?: string, type?: string, description?: string, about?: string, isActive?: boolean, createdAt: string, updatedAt?: string } 
@@ -159,6 +161,8 @@ export const CountEventsQueryParamsStringFields = 'lang country minDate maxDate'
 export const CountEventsByTopicQueryParamsStringFields = 'lang country minDate maxDate topicId';
 
 export const TrendingTopicsQueryParamsStringFields = 'lang country limit period';
+
+export const SimilarEventsByTopicsQueryParamsStringFields = 'lang country minDate maxDate limit topicIds exceptId';
 
 export const ArticleContentStringFields = 'id refId refType content format formatVersion topicsMap expiresAt createdAt updatedAt';
 

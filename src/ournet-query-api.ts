@@ -1,6 +1,6 @@
 
 import { GraphQlQuery, GraphQLQueryExecutor, GraphQLQueryItemInput, IDataMapper } from "./graphql-query";
-import { PublicHoliday, InputTimezoneGeoPoint, ForecastReport, DailyForecastDataPoint, HourlyForecastDataPoint, Place, PlaceOldId, NewsItem, NewsSearchParams, LatestNewsQueryParams, LatestNewsBySourceQueryParams, LatestNewsByTopicQueryParams, LatestNewsByEventQueryParams, CountNewsQueryParams, CountNewsBySourceQueryParams, CountNewsByTopicQueryParams, CountNewsByEventQueryParams, NewsTopItem, NewsEvent, LatestEventsQueryParams, LatestEventsByTopicQueryParams, CountEventsQueryParams, CountEventsByTopicQueryParams, TrendingTopicsQueryParams, ArticleContent, Topic, TopicWikiId, Quote, LatestQuotesQueryParams, LatestQuotesByTopicQueryParams, LatestQuotesByAuthorQueryParams, CountQuotesQueryParams, CountQuotesByTopicQueryParams, CountQuotesByAuthorQueryParams, QuoteTopItem, HoroscopeReport, HoroscopeRandomPhrasesQueryParams, HoroscopePhrase } from './ournet-api-types';
+import { PublicHoliday, InputTimezoneGeoPoint, ForecastReport, DailyForecastDataPoint, HourlyForecastDataPoint, Place, PlaceOldId, NewsItem, NewsSearchParams, LatestNewsQueryParams, LatestNewsBySourceQueryParams, LatestNewsByTopicQueryParams, LatestNewsByEventQueryParams, CountNewsQueryParams, CountNewsBySourceQueryParams, CountNewsByTopicQueryParams, CountNewsByEventQueryParams, NewsTopItem, NewsEvent, LatestEventsQueryParams, LatestEventsByTopicQueryParams, CountEventsQueryParams, CountEventsByTopicQueryParams, TrendingTopicsQueryParams, SimilarEventsByTopicsQueryParams, ArticleContent, Topic, TopicWikiId, Quote, LatestQuotesQueryParams, LatestQuotesByTopicQueryParams, LatestQuotesByAuthorQueryParams, CountQuotesQueryParams, CountQuotesByTopicQueryParams, CountQuotesByAuthorQueryParams, QuoteTopItem, HoroscopeReport, HoroscopeRandomPhrasesQueryParams, HoroscopePhrase } from './ournet-api-types';
 
 export class OurnetQueryApi<T> extends GraphQlQuery<T, OurnetQueryMethods> {
     constructor(executor: GraphQLQueryExecutor) {
@@ -554,6 +554,22 @@ mapper?:IDataMapper<MR, NewsTopItem[]>) {
             })
     }
 
+newsSimilarEventsByTopics<MR>(key:keyof T,
+data:GraphQLQueryItemInput,
+args:{ params?: SimilarEventsByTopicsQueryParams } ,
+mapper?:IDataMapper<MR, NewsEvent[]>) {
+        
+        return this.addQueryItem(key,
+            {
+                fields: data.fields,
+                name: OurnetQueryMethods.news_similarEventsByTopics,
+                mapper: mapper,
+                variables: [
+                    { name: 'params', value: args.params, type: 'SimilarEventsByTopicsQueryParams' }
+                ]
+            })
+    }
+
 newsArticleContentById<MR>(key:keyof T,
 data:GraphQLQueryItemInput,
 args:{ id: string } ,
@@ -908,6 +924,7 @@ export enum OurnetQueryMethods {
     news_eventsCountByTopic = "news_eventsCountByTopic",
     news_topTopics = "news_topTopics",
     news_trendingTopics = "news_trendingTopics",
+    news_similarEventsByTopics = "news_similarEventsByTopics",
     news_articleContentById = "news_articleContentById",
     news_articleContentsByIds = "news_articleContentsByIds",
     topics_topicById = "topics_topicById",
