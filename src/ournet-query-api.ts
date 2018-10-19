@@ -7,12 +7,11 @@ export class OurnetQueryApi<T> extends GraphQlQuery<T, OurnetQueryMethods> {
         super(executor, 'query');
     }
     ping<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
 mapper?:IDataMapper<MR, string>) {
         
         return this.addQueryItem(key,
             {
-                fields: data.fields,
+                
                 name: OurnetQueryMethods.ping,
                 mapper: mapper,
                 variables: [
@@ -338,13 +337,12 @@ mapper?:IDataMapper<MR, NewsItem[]>) {
     }
 
 newsItemsCount<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
 args:{ params?: CountNewsQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
         return this.addQueryItem(key,
             {
-                fields: data.fields,
+                
                 name: OurnetQueryMethods.news_itemsCount,
                 mapper: mapper,
                 variables: [
@@ -354,13 +352,12 @@ mapper?:IDataMapper<MR, number>) {
     }
 
 newsItemsCountBySource<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
 args:{ params?: CountNewsBySourceQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
         return this.addQueryItem(key,
             {
-                fields: data.fields,
+                
                 name: OurnetQueryMethods.news_itemsCountBySource,
                 mapper: mapper,
                 variables: [
@@ -370,13 +367,12 @@ mapper?:IDataMapper<MR, number>) {
     }
 
 newsItemsCountByTopic<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
 args:{ params?: CountNewsByTopicQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
         return this.addQueryItem(key,
             {
-                fields: data.fields,
+                
                 name: OurnetQueryMethods.news_itemsCountByTopic,
                 mapper: mapper,
                 variables: [
@@ -386,13 +382,12 @@ mapper?:IDataMapper<MR, number>) {
     }
 
 newsItemsCountByEvent<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
 args:{ params?: CountNewsByEventQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
         return this.addQueryItem(key,
             {
-                fields: data.fields,
+                
                 name: OurnetQueryMethods.news_itemsCountByEvent,
                 mapper: mapper,
                 variables: [
@@ -498,13 +493,12 @@ mapper?:IDataMapper<MR, NewsEvent[]>) {
     }
 
 newsEventsCount<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
 args:{ params?: CountEventsQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
         return this.addQueryItem(key,
             {
-                fields: data.fields,
+                
                 name: OurnetQueryMethods.news_eventsCount,
                 mapper: mapper,
                 variables: [
@@ -514,13 +508,12 @@ mapper?:IDataMapper<MR, number>) {
     }
 
 newsEventsCountByTopic<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
 args:{ params?: CountEventsByTopicQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
         return this.addQueryItem(key,
             {
-                fields: data.fields,
+                
                 name: OurnetQueryMethods.news_eventsCountByTopic,
                 mapper: mapper,
                 variables: [
@@ -722,13 +715,12 @@ mapper?:IDataMapper<MR, Quote[]>) {
     }
 
 quotesCount<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
 args:{ params?: CountQuotesQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
         return this.addQueryItem(key,
             {
-                fields: data.fields,
+                
                 name: OurnetQueryMethods.quotes_count,
                 mapper: mapper,
                 variables: [
@@ -738,13 +730,12 @@ mapper?:IDataMapper<MR, number>) {
     }
 
 quotesCountByTopic<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
 args:{ params?: CountQuotesByTopicQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
         return this.addQueryItem(key,
             {
-                fields: data.fields,
+                
                 name: OurnetQueryMethods.quotes_countByTopic,
                 mapper: mapper,
                 variables: [
@@ -754,13 +745,12 @@ mapper?:IDataMapper<MR, number>) {
     }
 
 quotesCountByAuthor<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
 args:{ params?: CountQuotesByAuthorQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
         return this.addQueryItem(key,
             {
-                fields: data.fields,
+                
                 name: OurnetQueryMethods.quotes_countByAuthor,
                 mapper: mapper,
                 variables: [

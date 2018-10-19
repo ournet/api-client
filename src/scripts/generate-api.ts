@@ -21,10 +21,18 @@ function generateApi(action: ActionType) {
     const upperAction = startWithUpperCase(action);
 
     const importedTypes: string[] = []
+    let hasDataField = false;
 
     const methods = type.fields.map(field => {
         const methodName = field.name.includes('_') ? (field.name.split('_')[0] + startWithUpperCase(field.name.split('_')[1])) : field.name;
-        const methodArgsData = [{ name: 'key', type: 'keyof T' }, { name: 'data', type: 'GraphQLQueryItemInput' }];
+        const methodArgsData = [{ name: 'key', type: 'keyof T' }];
+
+        const resultIsObject = typeIsObject(field.type) || typeIsList(field.type) && typeIsObject(field.type.ofType.ofType);
+
+        if (resultIsObject) {
+            methodArgsData.push({ name: 'data', type: 'GraphQLQueryItemInput' });
+            hasDataField = true;
+        }
         const argData = {
             name: 'args',
             type: generateTypeScriptType(field.args.map(arg => {
@@ -38,6 +46,7 @@ function generateApi(action: ActionType) {
         if (field.args && field.args.length) {
             methodArgsData.push(argData);
         }
+
 
         const resultJsType = getJsTypeName(field.type);
         if (typeIsObject(field.type)) {
@@ -67,7 +76,7 @@ function generateApi(action: ActionType) {
 
         const methodBody = `return this.addQueryItem(key,
             {
-                fields: data.fields,
+                ${resultIsObject ? 'fields: data.fields,' : ''}
                 name: Ournet${upperAction}Methods.${field.name},
                 mapper: mapper,
                 variables: [
@@ -82,7 +91,7 @@ function generateApi(action: ActionType) {
     });
 
     const data = `
-import { GraphQlQuery, GraphQLQueryExecutor, GraphQLQueryItemInput, IDataMapper } from "./graphql-query";
+import { GraphQlQuery, GraphQLQueryExecutor, ${hasDataField ? 'GraphQLQueryItemInput,' : ''} IDataMapper } from "./graphql-query";
 import { ${uniq(importedTypes).join(', ')} } from './ournet-api-types';
 
 export class Ournet${upperAction}Api<T> extends GraphQlQuery<T, Ournet${upperAction}Methods> {

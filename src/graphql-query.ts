@@ -9,7 +9,7 @@ export interface IDataMapper<R=any, V=any> {
 
 export type GraphQLQueryItem<NT extends string> = {
     name: NT
-    fields: string
+    fields?: string
     variables?: { type?: string, name: string, value: any, varName?: string }[]
     mapper?: IDataMapper
 }
@@ -71,7 +71,10 @@ export class GraphQlQuery<T extends {}, NT extends string> {
                 });
                 body += '(' + item.variables.map(v => v.name + ':' + v.varName).join(', ') + ')';
             }
-            return body + '{' + item.fields + '}';
+            if (item.fields) {
+                body += '{' + item.fields + '}';
+            }
+            return body;
         }).join(',');
 
         if (Object.keys(queryParams).length) {
