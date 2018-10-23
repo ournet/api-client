@@ -44,7 +44,7 @@ export type CountNewsByEventQueryParams = { lang: string, country: string, minDa
 
 export type NewsTopItem = { id: string, count: number } 
 
-export type NewsEvent = { id: string, title: string, slug: string, summary: string, source: NewsEventSource, lang: string, country: string, imageId: string, imageHost: string, imageSourceId: string, countNews: number, countViews: number, countQuotes: number, countVideos: number, countImages: number, topics: NewsTopic[], items: NewsEventItem[], quotesIds?: string[], videosIds?: string[], status?: string, createdAt: string, updatedAt?: string, expiresAt: number, hasContent: boolean } 
+export type NewsEvent = { id: string, title: string, slug: string, summary: string, source: NewsEventSource, lang: string, country: string, imageId: string, imageHost: string, imageSourceId: string, countNews: number, countViews: number, countQuotes: number, countVideos: number, countImages: number, topics: NewsTopic[], items: NewsEventItem[], quotesIds?: string[], videosIds?: string[], imagesIds?: string[], status?: string, createdAt: string, updatedAt?: string, expiresAt: number, hasContent: boolean } 
 
 export type NewsEventSource = { id: string, host: string, path: string, sourceId: string } 
 
@@ -146,7 +146,7 @@ export const CountNewsByEventQueryParamsStringFields = 'lang country minDate max
 
 export const NewsTopItemStringFields = 'id count';
 
-export const NewsEventStringFields = 'id title slug summary source { id host path sourceId } lang country imageId imageHost imageSourceId countNews countViews countQuotes countVideos countImages topics { id name slug abbr type } items { id title sourceId host path publishedAt } quotesIds videosIds status createdAt updatedAt expiresAt hasContent';
+export const NewsEventStringFields = 'id title slug summary source { id host path sourceId } lang country imageId imageHost imageSourceId countNews countViews countQuotes countVideos countImages topics { id name slug abbr type } items { id title sourceId host path publishedAt } quotesIds videosIds imagesIds status createdAt updatedAt expiresAt hasContent';
 
 export const NewsEventSourceStringFields = 'id host path sourceId';
 
