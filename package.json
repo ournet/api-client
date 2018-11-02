@@ -38,17 +38,15 @@
   },
   "homepage": "https://github.com/ournet/api-client#readme",
   "devDependencies": {
-    "@types/node": "latest",
-    "@types/node-fetch": "^2.1.1",
-    "apollo-codegen": "^0.19.1",
-    "ava": "^0.23.0",
-    "debug": "^4.0.1",
+    "@types/node": "10.12.2",
+    "@types/node-fetch": "^2.1.2",
+    "apollo-codegen": "^0.20.2",
+    "ava": "^0.25.0",
+    "debug": "^4.1.0",
     "rimraf": "^2.6.2",
-    "typescript": "latest"
+    "typescript": "3.1.6"
   },
   "dependencies": {
-    "@ournet/places-domain": "^0.1.4",
-    "@ournet/weather-domain": "^0.1.4",
-    "node-fetch": "^2.1.2"
+    "node-fetch": "^2.2.0"
   }
 }
