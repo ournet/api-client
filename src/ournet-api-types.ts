@@ -94,9 +94,9 @@ export type HoroscopeReport = { id: string, lang: string, text: string, length: 
 
 export type HoroscopeReportStats = { love: number, success: number, health: number } 
 
-export type HoroscopeRandomPhrasesQueryParams = { lang: string, limit: number, sign: number, period: string } 
-
 export type HoroscopePhrase = { id: string, lang: string, source: string, text: string, length: number, sign: number, period: string, createdAt: string } 
+
+export type HoroscopeGenerateReportsParams = { lang: string, period: string } 
 
 export type ArticleContentRef = { refId: string, refType: string } 
 
@@ -196,8 +196,8 @@ export const HoroscopeReportStringFields = 'id lang text length sign period phra
 
 export const HoroscopeReportStatsStringFields = 'love success health';
 
-export const HoroscopeRandomPhrasesQueryParamsStringFields = 'lang limit sign period';
-
 export const HoroscopePhraseStringFields = 'id lang source text length sign period createdAt';
+
+export const HoroscopeGenerateReportsParamsStringFields = 'lang period';
 
 export const ArticleContentRefStringFields = 'refId refType';
