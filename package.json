@@ -1,6 +1,6 @@
 {
   "name": "@ournet/api-client",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Ournet api client",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
@@ -38,7 +38,7 @@
   },
   "homepage": "https://github.com/ournet/api-client#readme",
   "devDependencies": {
-    "@types/node": "10.12.2",
+    "@types/node": "10.12.7",
     "@types/node-fetch": "^2.1.2",
     "apollo-codegen": "^0.20.2",
     "ava": "^0.25.0",
@@ -47,6 +47,6 @@
     "typescript": "3.1.6"
   },
   "dependencies": {
-    "node-fetch": "^2.2.0"
+    "node-fetch": "^2.3.0"
   }
 }
