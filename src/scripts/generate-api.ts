@@ -30,7 +30,7 @@ function generateApi(action: ActionType) {
         const resultIsObject = typeIsObject(field.type) || typeIsList(field.type) && typeIsObject(field.type.ofType.ofType);
 
         if (resultIsObject) {
-            methodArgsData.push({ name: 'data', type: 'GraphQLQueryItemInput' });
+            methodArgsData.push({ name: 'data', type: 'GraphQlQueryItemInput' });
             hasDataField = true;
         }
         const argData = {
@@ -91,11 +91,12 @@ function generateApi(action: ActionType) {
     });
 
     const data = `
-import { GraphQlQuery, GraphQLQueryExecutor, ${hasDataField ? 'GraphQLQueryItemInput,' : ''} IDataMapper } from "./graphql-query";
+import { GraphQlQuery } from "./graphql-query";
 import { ${uniq(importedTypes).join(', ')} } from './ournet-api-types';
+import { IGraphQlQueryExecutor, ${hasDataField ? 'GraphQlQueryItemInput,' : ''} IDataMapper } from "./graphql";
 
 export class Ournet${upperAction}Api<T> extends GraphQlQuery<T, Ournet${upperAction}Methods> {
-    constructor(executor: GraphQLQueryExecutor) {
+    constructor(executor: IGraphQlQueryExecutor) {
         super(executor, '${action}');
     }
     ${methods.join('\n\n')}

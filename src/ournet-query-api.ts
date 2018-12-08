@@ -1,9 +1,10 @@
 
-import { GraphQlQuery, GraphQLQueryExecutor, GraphQLQueryItemInput, IDataMapper } from "./graphql-query";
+import { GraphQlQuery } from "./graphql-query";
 import { PublicHoliday, InputTimezoneGeoPoint, ForecastReport, DailyForecastDataPoint, HourlyForecastDataPoint, Place, PlaceOldId, NewsItem, NewsSearchParams, LatestNewsQueryParams, LatestNewsBySourceQueryParams, LatestNewsByTopicQueryParams, LatestNewsByEventQueryParams, CountNewsQueryParams, CountNewsBySourceQueryParams, CountNewsByTopicQueryParams, CountNewsByEventQueryParams, NewsTopItem, NewsEvent, LatestEventsQueryParams, LatestEventsByTopicQueryParams, CountEventsQueryParams, CountEventsByTopicQueryParams, TrendingTopicsQueryParams, SimilarEventsByTopicsQueryParams, ArticleContent, Topic, TopicWikiId, Quote, LatestQuotesQueryParams, LatestQuotesByTopicQueryParams, LatestQuotesByAuthorQueryParams, CountQuotesQueryParams, CountQuotesByTopicQueryParams, CountQuotesByAuthorQueryParams, QuoteTopItem, HoroscopeReport, HoroscopePhrase, HoroscopeGenerateReportsParams } from './ournet-api-types';
+import { IGraphQlQueryExecutor, GraphQlQueryItemInput, IDataMapper } from "./graphql";
 
 export class OurnetQueryApi<T> extends GraphQlQuery<T, OurnetQueryMethods> {
-    constructor(executor: GraphQLQueryExecutor) {
+    constructor(executor: IGraphQlQueryExecutor) {
         super(executor, 'query');
     }
     ping<MR>(key:keyof T,
@@ -21,7 +22,7 @@ mapper?:IDataMapper<MR, string>) {
     }
 
 publicHolidays<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ country: string, lang: string, start?: number, end?: number } ,
 mapper?:IDataMapper<MR, PublicHoliday[]>) {
         
@@ -40,7 +41,7 @@ mapper?:IDataMapper<MR, PublicHoliday[]>) {
     }
 
 weatherForecastReport<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ place: InputTimezoneGeoPoint } ,
 mapper?:IDataMapper<MR, ForecastReport>) {
         
@@ -56,7 +57,7 @@ mapper?:IDataMapper<MR, ForecastReport>) {
     }
 
 weatherDatePlacesForecast<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ places: InputTimezoneGeoPoint[], date: string } ,
 mapper?:IDataMapper<MR, DailyForecastDataPoint[]>) {
         
@@ -73,7 +74,7 @@ mapper?:IDataMapper<MR, DailyForecastDataPoint[]>) {
     }
 
 weatherNowPlaceForecast<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ place: InputTimezoneGeoPoint } ,
 mapper?:IDataMapper<MR, HourlyForecastDataPoint>) {
         
@@ -89,7 +90,7 @@ mapper?:IDataMapper<MR, HourlyForecastDataPoint>) {
     }
 
 placesPlaceById<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, Place>) {
         
@@ -105,7 +106,7 @@ mapper?:IDataMapper<MR, Place>) {
     }
 
 placesSearchPlace<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ query: string, country: string, limit: number, type?: string } ,
 mapper?:IDataMapper<MR, Place[]>) {
         
@@ -124,7 +125,7 @@ mapper?:IDataMapper<MR, Place[]>) {
     }
 
 placesPlacesByIds<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ ids: string[] } ,
 mapper?:IDataMapper<MR, Place[]>) {
         
@@ -140,7 +141,7 @@ mapper?:IDataMapper<MR, Place[]>) {
     }
 
 placesPlacesByAdmin1Code<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ country: string, admin1Code: string, limit: number } ,
 mapper?:IDataMapper<MR, Place[]>) {
         
@@ -158,7 +159,7 @@ mapper?:IDataMapper<MR, Place[]>) {
     }
 
 placesMainPlaces<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ country: string, limit: number } ,
 mapper?:IDataMapper<MR, Place[]>) {
         
@@ -175,7 +176,7 @@ mapper?:IDataMapper<MR, Place[]>) {
     }
 
 placesAdmin1s<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ country: string, limit: number } ,
 mapper?:IDataMapper<MR, Place[]>) {
         
@@ -192,7 +193,7 @@ mapper?:IDataMapper<MR, Place[]>) {
     }
 
 placesAdmin1<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ admin1Code: string, country: string } ,
 mapper?:IDataMapper<MR, Place>) {
         
@@ -209,7 +210,7 @@ mapper?:IDataMapper<MR, Place>) {
     }
 
 placesPlaceOldId<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ id: number } ,
 mapper?:IDataMapper<MR, PlaceOldId>) {
         
@@ -225,7 +226,7 @@ mapper?:IDataMapper<MR, PlaceOldId>) {
     }
 
 newsItemById<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, NewsItem>) {
         
@@ -241,7 +242,7 @@ mapper?:IDataMapper<MR, NewsItem>) {
     }
 
 newsItemsByIds<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ ids: string[] } ,
 mapper?:IDataMapper<MR, NewsItem[]>) {
         
@@ -257,7 +258,7 @@ mapper?:IDataMapper<MR, NewsItem[]>) {
     }
 
 newsItemsSearch<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params: NewsSearchParams } ,
 mapper?:IDataMapper<MR, NewsItem[]>) {
         
@@ -273,7 +274,7 @@ mapper?:IDataMapper<MR, NewsItem[]>) {
     }
 
 newsItemsLatest<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params?: LatestNewsQueryParams } ,
 mapper?:IDataMapper<MR, NewsItem[]>) {
         
@@ -289,7 +290,7 @@ mapper?:IDataMapper<MR, NewsItem[]>) {
     }
 
 newsItemsLatestBySource<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params?: LatestNewsBySourceQueryParams } ,
 mapper?:IDataMapper<MR, NewsItem[]>) {
         
@@ -305,7 +306,7 @@ mapper?:IDataMapper<MR, NewsItem[]>) {
     }
 
 newsItemsLatestByTopic<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params?: LatestNewsByTopicQueryParams } ,
 mapper?:IDataMapper<MR, NewsItem[]>) {
         
@@ -321,7 +322,7 @@ mapper?:IDataMapper<MR, NewsItem[]>) {
     }
 
 newsItemsLatestByEvent<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params?: LatestNewsByEventQueryParams } ,
 mapper?:IDataMapper<MR, NewsItem[]>) {
         
@@ -397,7 +398,7 @@ mapper?:IDataMapper<MR, number>) {
     }
 
 newsTopSources<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params?: LatestNewsQueryParams } ,
 mapper?:IDataMapper<MR, NewsTopItem[]>) {
         
@@ -413,7 +414,7 @@ mapper?:IDataMapper<MR, NewsTopItem[]>) {
     }
 
 newsTopSourceTopics<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params?: LatestNewsBySourceQueryParams } ,
 mapper?:IDataMapper<MR, NewsTopItem[]>) {
         
@@ -429,7 +430,7 @@ mapper?:IDataMapper<MR, NewsTopItem[]>) {
     }
 
 newsEventById<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, NewsEvent>) {
         
@@ -445,7 +446,7 @@ mapper?:IDataMapper<MR, NewsEvent>) {
     }
 
 newsEventsByIds<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ ids: string[] } ,
 mapper?:IDataMapper<MR, NewsEvent[]>) {
         
@@ -461,7 +462,7 @@ mapper?:IDataMapper<MR, NewsEvent[]>) {
     }
 
 newsEventsLatest<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params?: LatestEventsQueryParams } ,
 mapper?:IDataMapper<MR, NewsEvent[]>) {
         
@@ -477,7 +478,7 @@ mapper?:IDataMapper<MR, NewsEvent[]>) {
     }
 
 newsEventsLatestByTopic<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params?: LatestEventsByTopicQueryParams } ,
 mapper?:IDataMapper<MR, NewsEvent[]>) {
         
@@ -523,7 +524,7 @@ mapper?:IDataMapper<MR, number>) {
     }
 
 newsTopTopics<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params?: LatestEventsQueryParams } ,
 mapper?:IDataMapper<MR, NewsTopItem[]>) {
         
@@ -539,7 +540,7 @@ mapper?:IDataMapper<MR, NewsTopItem[]>) {
     }
 
 newsTrendingTopics<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params?: TrendingTopicsQueryParams } ,
 mapper?:IDataMapper<MR, NewsTopItem[]>) {
         
@@ -555,7 +556,7 @@ mapper?:IDataMapper<MR, NewsTopItem[]>) {
     }
 
 newsSimilarEventsByTopics<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params?: SimilarEventsByTopicsQueryParams } ,
 mapper?:IDataMapper<MR, NewsEvent[]>) {
         
@@ -571,7 +572,7 @@ mapper?:IDataMapper<MR, NewsEvent[]>) {
     }
 
 newsArticleContentById<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, ArticleContent>) {
         
@@ -587,7 +588,7 @@ mapper?:IDataMapper<MR, ArticleContent>) {
     }
 
 newsArticleContentsByIds<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ ids: string[] } ,
 mapper?:IDataMapper<MR, ArticleContent[]>) {
         
@@ -603,7 +604,7 @@ mapper?:IDataMapper<MR, ArticleContent[]>) {
     }
 
 topicsTopicById<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, Topic>) {
         
@@ -619,7 +620,7 @@ mapper?:IDataMapper<MR, Topic>) {
     }
 
 topicsTopicsByIds<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ ids: string[] } ,
 mapper?:IDataMapper<MR, Topic[]>) {
         
@@ -635,7 +636,7 @@ mapper?:IDataMapper<MR, Topic[]>) {
     }
 
 topicsTopicsByWikiIds<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ wikiIds: TopicWikiId[] } ,
 mapper?:IDataMapper<MR, Topic[]>) {
         
@@ -651,7 +652,7 @@ mapper?:IDataMapper<MR, Topic[]>) {
     }
 
 quotesQuoteById<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, Quote>) {
         
@@ -667,7 +668,7 @@ mapper?:IDataMapper<MR, Quote>) {
     }
 
 quotesQuotesByIds<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ ids: string[] } ,
 mapper?:IDataMapper<MR, Quote[]>) {
         
@@ -683,7 +684,7 @@ mapper?:IDataMapper<MR, Quote[]>) {
     }
 
 quotesLatest<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params?: LatestQuotesQueryParams } ,
 mapper?:IDataMapper<MR, Quote[]>) {
         
@@ -699,7 +700,7 @@ mapper?:IDataMapper<MR, Quote[]>) {
     }
 
 quotesLatestByTopic<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params?: LatestQuotesByTopicQueryParams } ,
 mapper?:IDataMapper<MR, Quote[]>) {
         
@@ -715,7 +716,7 @@ mapper?:IDataMapper<MR, Quote[]>) {
     }
 
 quotesLatestByAuthor<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params?: LatestQuotesByAuthorQueryParams } ,
 mapper?:IDataMapper<MR, Quote[]>) {
         
@@ -776,7 +777,7 @@ mapper?:IDataMapper<MR, number>) {
     }
 
 quotesTopTopics<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params?: LatestQuotesQueryParams } ,
 mapper?:IDataMapper<MR, QuoteTopItem[]>) {
         
@@ -792,7 +793,7 @@ mapper?:IDataMapper<MR, QuoteTopItem[]>) {
     }
 
 quotesTopAuthors<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params?: LatestQuotesQueryParams } ,
 mapper?:IDataMapper<MR, QuoteTopItem[]>) {
         
@@ -808,7 +809,7 @@ mapper?:IDataMapper<MR, QuoteTopItem[]>) {
     }
 
 quotesTopAuthorTopics<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params?: LatestQuotesByAuthorQueryParams } ,
 mapper?:IDataMapper<MR, QuoteTopItem[]>) {
         
@@ -824,7 +825,7 @@ mapper?:IDataMapper<MR, QuoteTopItem[]>) {
     }
 
 horoscopesReportById<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, HoroscopeReport>) {
         
@@ -840,7 +841,7 @@ mapper?:IDataMapper<MR, HoroscopeReport>) {
     }
 
 horoscopesReportsByIds<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ ids: string[] } ,
 mapper?:IDataMapper<MR, HoroscopeReport[]>) {
         
@@ -856,7 +857,7 @@ mapper?:IDataMapper<MR, HoroscopeReport[]>) {
     }
 
 horoscopesPhraseById<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, HoroscopePhrase>) {
         
@@ -872,7 +873,7 @@ mapper?:IDataMapper<MR, HoroscopePhrase>) {
     }
 
 horoscopesGenerateReports<MR>(key:keyof T,
-data:GraphQLQueryItemInput,
+data:GraphQlQueryItemInput,
 args:{ params: HoroscopeGenerateReportsParams } ,
 mapper?:IDataMapper<MR, HoroscopeReport[]>) {
         

@@ -1,9 +1,10 @@
 
-import { GraphQlQuery, GraphQLQueryExecutor,  IDataMapper } from "./graphql-query";
+import { GraphQlQuery } from "./graphql-query";
 import {  } from './ournet-api-types';
+import { IGraphQlQueryExecutor,  IDataMapper } from "./graphql";
 
 export class OurnetMutationApi<T> extends GraphQlQuery<T, OurnetMutationMethods> {
-    constructor(executor: GraphQLQueryExecutor) {
+    constructor(executor: IGraphQlQueryExecutor) {
         super(executor, 'mutation');
     }
     add<MR>(key:keyof T,
