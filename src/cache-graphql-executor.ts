@@ -82,6 +82,6 @@ export class CacheGraphQlQueryExecutor extends GraphQlQueryExecutor {
     }
 
     private createItemKey(item: GraphQlQueryItem<string>) {
-        return item.name + '_' + item.fields || '';
+        return item.name + '#' + (item.variables ? JSON.stringify(item.variables.map(item=>item.value)) : '') + '#' + item.fields || '';
     }
 }
