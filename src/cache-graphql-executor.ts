@@ -36,8 +36,8 @@ export class CacheGraphQlQueryExecutor extends GraphQlQueryExecutor {
                 const itemKey = this.createItemKey(item);
                 const value = cache.get(itemKey);
                 if (value !== undefined) {
-                    debug(`get item from cache: ${key} - ${itemKey}`)
-                        (<any>result.data)[key] = value;
+                    // debug(`get item from cache: ${key} - ${itemKey}`);
+                    (<any>result.data)[key] = value;
                     continue;
                 }
             }
@@ -46,6 +46,7 @@ export class CacheGraphQlQueryExecutor extends GraphQlQueryExecutor {
         }
 
         if (!hasNonCacheItems) {
+            debug(`none non-cache items!`)
             return result;
         }
 
@@ -75,7 +76,7 @@ export class CacheGraphQlQueryExecutor extends GraphQlQueryExecutor {
                 const itemKey = this.createItemKey(item);
                 cache.set(itemKey, value);
 
-                debug(`set cache item: ${key} - ${itemKey}`)
+                // debug(`set cache item: ${key} - ${itemKey}`)
             }
         }
     }

@@ -2,7 +2,7 @@ import { Index } from "./utils";
 import { GraphQlRequestResult, GraphQlQueryType, GraphQlQueryItems, IGraphQlQueryExecutor } from "./graphql";
 import fetch from 'node-fetch';
 
-const debug = require('debug')('ournet:api-client');
+// const debug = require('debug')('ournet:api-client');
 
 export type GraphQLQueryExecutorData = {
     query: string
@@ -13,9 +13,9 @@ export class GraphQlQueryExecutor<NT extends string=string> implements IGraphQlQ
     constructor(private url: string, private headers: Index<string> = { 'Content-Type': 'application/json' }) { }
 
     execute<T>(type: GraphQlQueryType, items: GraphQlQueryItems<NT>): Promise<GraphQlRequestResult<T>> {
-        debug(`executing url ${this.url}`);
+        // debug(`executing url ${this.url}`);
         const data = this.formatQueryData(type, items);
-        debug(`executing data ${JSON.stringify(data)}`);
+        // debug(`executing data ${JSON.stringify(data)}`);
         return this.fetch(data);
     }
 
