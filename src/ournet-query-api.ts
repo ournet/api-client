@@ -4,13 +4,13 @@ import { PublicHoliday, InputTimezoneGeoPoint, ForecastReport, DailyForecastData
 import { IGraphQlQueryExecutor, GraphQlQueryItemInput, IDataMapper } from "./graphql";
 
 export class OurnetQueryApi<T> extends GraphQlQuery<T, OurnetQueryMethods> {
-    constructor(executor: IGraphQlQueryExecutor) {
+    constructor(executor: IGraphQlQueryExecutor<OurnetQueryMethods>) {
         super(executor, 'query');
     }
     ping<MR>(key:keyof T,
 mapper?:IDataMapper<MR, string>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 
                 name: OurnetQueryMethods.ping,
@@ -26,7 +26,7 @@ data:GraphQlQueryItemInput,
 args:{ country: string, lang: string, start?: number, end?: number } ,
 mapper?:IDataMapper<MR, PublicHoliday[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.publicHolidays,
@@ -45,7 +45,7 @@ data:GraphQlQueryItemInput,
 args:{ place: InputTimezoneGeoPoint } ,
 mapper?:IDataMapper<MR, ForecastReport>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.weather_forecastReport,
@@ -61,7 +61,7 @@ data:GraphQlQueryItemInput,
 args:{ places: InputTimezoneGeoPoint[], date: string } ,
 mapper?:IDataMapper<MR, DailyForecastDataPoint[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.weather_datePlacesForecast,
@@ -78,7 +78,7 @@ data:GraphQlQueryItemInput,
 args:{ place: InputTimezoneGeoPoint } ,
 mapper?:IDataMapper<MR, HourlyForecastDataPoint>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.weather_nowPlaceForecast,
@@ -94,7 +94,7 @@ data:GraphQlQueryItemInput,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, Place>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.places_placeById,
@@ -110,7 +110,7 @@ data:GraphQlQueryItemInput,
 args:{ query: string, country: string, limit: number, type?: string } ,
 mapper?:IDataMapper<MR, Place[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.places_searchPlace,
@@ -129,7 +129,7 @@ data:GraphQlQueryItemInput,
 args:{ ids: string[] } ,
 mapper?:IDataMapper<MR, Place[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.places_placesByIds,
@@ -145,7 +145,7 @@ data:GraphQlQueryItemInput,
 args:{ country: string, admin1Code: string, limit: number } ,
 mapper?:IDataMapper<MR, Place[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.places_placesByAdmin1Code,
@@ -163,7 +163,7 @@ data:GraphQlQueryItemInput,
 args:{ country: string, limit: number } ,
 mapper?:IDataMapper<MR, Place[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.places_mainPlaces,
@@ -180,7 +180,7 @@ data:GraphQlQueryItemInput,
 args:{ country: string, limit: number } ,
 mapper?:IDataMapper<MR, Place[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.places_admin1s,
@@ -197,7 +197,7 @@ data:GraphQlQueryItemInput,
 args:{ admin1Code: string, country: string } ,
 mapper?:IDataMapper<MR, Place>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.places_admin1,
@@ -214,7 +214,7 @@ data:GraphQlQueryItemInput,
 args:{ id: number } ,
 mapper?:IDataMapper<MR, PlaceOldId>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.places_placeOldId,
@@ -230,7 +230,7 @@ data:GraphQlQueryItemInput,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, NewsItem>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_itemById,
@@ -246,7 +246,7 @@ data:GraphQlQueryItemInput,
 args:{ ids: string[] } ,
 mapper?:IDataMapper<MR, NewsItem[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_itemsByIds,
@@ -262,7 +262,7 @@ data:GraphQlQueryItemInput,
 args:{ params: NewsSearchParams } ,
 mapper?:IDataMapper<MR, NewsItem[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_itemsSearch,
@@ -278,7 +278,7 @@ data:GraphQlQueryItemInput,
 args:{ params?: LatestNewsQueryParams } ,
 mapper?:IDataMapper<MR, NewsItem[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_itemsLatest,
@@ -294,7 +294,7 @@ data:GraphQlQueryItemInput,
 args:{ params?: LatestNewsBySourceQueryParams } ,
 mapper?:IDataMapper<MR, NewsItem[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_itemsLatestBySource,
@@ -310,7 +310,7 @@ data:GraphQlQueryItemInput,
 args:{ params?: LatestNewsByTopicQueryParams } ,
 mapper?:IDataMapper<MR, NewsItem[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_itemsLatestByTopic,
@@ -326,7 +326,7 @@ data:GraphQlQueryItemInput,
 args:{ params?: LatestNewsByEventQueryParams } ,
 mapper?:IDataMapper<MR, NewsItem[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_itemsLatestByEvent,
@@ -341,7 +341,7 @@ newsItemsCount<MR>(key:keyof T,
 args:{ params?: CountNewsQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 
                 name: OurnetQueryMethods.news_itemsCount,
@@ -356,7 +356,7 @@ newsItemsCountBySource<MR>(key:keyof T,
 args:{ params?: CountNewsBySourceQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 
                 name: OurnetQueryMethods.news_itemsCountBySource,
@@ -371,7 +371,7 @@ newsItemsCountByTopic<MR>(key:keyof T,
 args:{ params?: CountNewsByTopicQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 
                 name: OurnetQueryMethods.news_itemsCountByTopic,
@@ -386,7 +386,7 @@ newsItemsCountByEvent<MR>(key:keyof T,
 args:{ params?: CountNewsByEventQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 
                 name: OurnetQueryMethods.news_itemsCountByEvent,
@@ -402,7 +402,7 @@ data:GraphQlQueryItemInput,
 args:{ params?: LatestNewsQueryParams } ,
 mapper?:IDataMapper<MR, NewsTopItem[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_topSources,
@@ -418,7 +418,7 @@ data:GraphQlQueryItemInput,
 args:{ params?: LatestNewsBySourceQueryParams } ,
 mapper?:IDataMapper<MR, NewsTopItem[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_topSourceTopics,
@@ -434,7 +434,7 @@ data:GraphQlQueryItemInput,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, NewsEvent>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_eventById,
@@ -450,7 +450,7 @@ data:GraphQlQueryItemInput,
 args:{ ids: string[] } ,
 mapper?:IDataMapper<MR, NewsEvent[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_eventsByIds,
@@ -466,7 +466,7 @@ data:GraphQlQueryItemInput,
 args:{ params?: LatestEventsQueryParams } ,
 mapper?:IDataMapper<MR, NewsEvent[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_eventsLatest,
@@ -482,7 +482,7 @@ data:GraphQlQueryItemInput,
 args:{ params?: LatestEventsByTopicQueryParams } ,
 mapper?:IDataMapper<MR, NewsEvent[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_eventsLatestByTopic,
@@ -497,7 +497,7 @@ newsEventsCount<MR>(key:keyof T,
 args:{ params?: CountEventsQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 
                 name: OurnetQueryMethods.news_eventsCount,
@@ -512,7 +512,7 @@ newsEventsCountByTopic<MR>(key:keyof T,
 args:{ params?: CountEventsByTopicQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 
                 name: OurnetQueryMethods.news_eventsCountByTopic,
@@ -528,7 +528,7 @@ data:GraphQlQueryItemInput,
 args:{ params?: LatestEventsQueryParams } ,
 mapper?:IDataMapper<MR, NewsTopItem[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_topTopics,
@@ -544,7 +544,7 @@ data:GraphQlQueryItemInput,
 args:{ params?: TrendingTopicsQueryParams } ,
 mapper?:IDataMapper<MR, NewsTopItem[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_trendingTopics,
@@ -560,7 +560,7 @@ data:GraphQlQueryItemInput,
 args:{ params?: SimilarEventsByTopicsQueryParams } ,
 mapper?:IDataMapper<MR, NewsEvent[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_similarEventsByTopics,
@@ -576,7 +576,7 @@ data:GraphQlQueryItemInput,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, ArticleContent>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_articleContentById,
@@ -592,7 +592,7 @@ data:GraphQlQueryItemInput,
 args:{ ids: string[] } ,
 mapper?:IDataMapper<MR, ArticleContent[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.news_articleContentsByIds,
@@ -608,7 +608,7 @@ data:GraphQlQueryItemInput,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, Topic>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.topics_topicById,
@@ -624,7 +624,7 @@ data:GraphQlQueryItemInput,
 args:{ ids: string[] } ,
 mapper?:IDataMapper<MR, Topic[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.topics_topicsByIds,
@@ -640,7 +640,7 @@ data:GraphQlQueryItemInput,
 args:{ wikiIds: TopicWikiId[] } ,
 mapper?:IDataMapper<MR, Topic[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.topics_topicsByWikiIds,
@@ -656,7 +656,7 @@ data:GraphQlQueryItemInput,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, Quote>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.quotes_quoteById,
@@ -672,7 +672,7 @@ data:GraphQlQueryItemInput,
 args:{ ids: string[] } ,
 mapper?:IDataMapper<MR, Quote[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.quotes_quotesByIds,
@@ -688,7 +688,7 @@ data:GraphQlQueryItemInput,
 args:{ params?: LatestQuotesQueryParams } ,
 mapper?:IDataMapper<MR, Quote[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.quotes_latest,
@@ -704,7 +704,7 @@ data:GraphQlQueryItemInput,
 args:{ params?: LatestQuotesByTopicQueryParams } ,
 mapper?:IDataMapper<MR, Quote[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.quotes_latestByTopic,
@@ -720,7 +720,7 @@ data:GraphQlQueryItemInput,
 args:{ params?: LatestQuotesByAuthorQueryParams } ,
 mapper?:IDataMapper<MR, Quote[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.quotes_latestByAuthor,
@@ -735,7 +735,7 @@ quotesCount<MR>(key:keyof T,
 args:{ params?: CountQuotesQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 
                 name: OurnetQueryMethods.quotes_count,
@@ -750,7 +750,7 @@ quotesCountByTopic<MR>(key:keyof T,
 args:{ params?: CountQuotesByTopicQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 
                 name: OurnetQueryMethods.quotes_countByTopic,
@@ -765,7 +765,7 @@ quotesCountByAuthor<MR>(key:keyof T,
 args:{ params?: CountQuotesByAuthorQueryParams } ,
 mapper?:IDataMapper<MR, number>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 
                 name: OurnetQueryMethods.quotes_countByAuthor,
@@ -781,7 +781,7 @@ data:GraphQlQueryItemInput,
 args:{ params?: LatestQuotesQueryParams } ,
 mapper?:IDataMapper<MR, QuoteTopItem[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.quotes_topTopics,
@@ -797,7 +797,7 @@ data:GraphQlQueryItemInput,
 args:{ params?: LatestQuotesQueryParams } ,
 mapper?:IDataMapper<MR, QuoteTopItem[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.quotes_topAuthors,
@@ -813,7 +813,7 @@ data:GraphQlQueryItemInput,
 args:{ params?: LatestQuotesByAuthorQueryParams } ,
 mapper?:IDataMapper<MR, QuoteTopItem[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.quotes_topAuthorTopics,
@@ -829,7 +829,7 @@ data:GraphQlQueryItemInput,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, HoroscopeReport>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.horoscopes_reportById,
@@ -845,7 +845,7 @@ data:GraphQlQueryItemInput,
 args:{ ids: string[] } ,
 mapper?:IDataMapper<MR, HoroscopeReport[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.horoscopes_reportsByIds,
@@ -861,7 +861,7 @@ data:GraphQlQueryItemInput,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, HoroscopePhrase>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.horoscopes_phraseById,
@@ -877,7 +877,7 @@ data:GraphQlQueryItemInput,
 args:{ params: HoroscopeGenerateReportsParams } ,
 mapper?:IDataMapper<MR, HoroscopeReport[]>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 fields: data.fields,
                 name: OurnetQueryMethods.horoscopes_generateReports,

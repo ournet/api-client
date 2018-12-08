@@ -22,6 +22,6 @@ export type GraphQlRequestResult<T={}> = {
 export type GraphQlQueryType = 'query' | 'mutation';
 export interface GraphQlQueryItems<NT extends string=string> { [index: string]: GraphQlQueryItem<NT> }
 
-export interface IGraphQlQueryExecutor {
-    execute<T>(type: GraphQlQueryType, items: GraphQlQueryItems): Promise<GraphQlRequestResult<T>>
+export interface IGraphQlQueryExecutor<NT extends string=string> {
+    execute<T>(type: GraphQlQueryType, items: GraphQlQueryItems<NT>): Promise<GraphQlRequestResult<T>>
 }

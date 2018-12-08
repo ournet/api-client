@@ -9,10 +9,10 @@ export type GraphQLQueryExecutorData = {
     variables: Index<any>
 }
 
-export class GraphQlQueryExecutor implements IGraphQlQueryExecutor {
+export class GraphQlQueryExecutor<NT extends string=string> implements IGraphQlQueryExecutor<NT> {
     constructor(private url: string, private headers: Index<string> = { 'Content-Type': 'application/json' }) { }
 
-    execute<T>(type: GraphQlQueryType, items: GraphQlQueryItems): Promise<GraphQlRequestResult<T>> {
+    execute<T>(type: GraphQlQueryType, items: GraphQlQueryItems<NT>): Promise<GraphQlRequestResult<T>> {
         debug(`executing url ${this.url}`);
         const data = this.formatQueryData(type, items);
         debug(`executing data ${JSON.stringify(data)}`);
@@ -29,7 +29,7 @@ export class GraphQlQueryExecutor implements IGraphQlQueryExecutor {
         return response.json();
     }
 
-    protected formatQueryData(type: GraphQlQueryType, items: GraphQlQueryItems): GraphQLQueryExecutorData {
+    protected formatQueryData(type: GraphQlQueryType, items: GraphQlQueryItems<NT>): GraphQLQueryExecutorData {
         const variables: Index<any> = {};
         let query: string = type + ' queryName';
         const queryParams: Index<any> = {};

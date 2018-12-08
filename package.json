@@ -38,6 +38,7 @@
   },
   "homepage": "https://github.com/ournet/api-client#readme",
   "devDependencies": {
+    "@types/lru-cache": "^4.1.1",
     "@types/node": "10.12.7",
     "@types/node-fetch": "^2.1.2",
     "apollo-codegen": "^0.20.2",
@@ -47,6 +48,7 @@
     "typescript": "3.1.6"
   },
   "dependencies": {
+    "lru-cache": "^5.1.1",
     "node-fetch": "^2.3.0"
   }
 }

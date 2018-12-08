@@ -4,14 +4,14 @@ import {  } from './ournet-api-types';
 import { IGraphQlQueryExecutor,  IDataMapper } from "./graphql";
 
 export class OurnetMutationApi<T> extends GraphQlQuery<T, OurnetMutationMethods> {
-    constructor(executor: IGraphQlQueryExecutor) {
+    constructor(executor: IGraphQlQueryExecutor<OurnetMutationMethods>) {
         super(executor, 'mutation');
     }
     add<MR>(key:keyof T,
 args:{ n1: number, n2: number } ,
 mapper?:IDataMapper<MR, number>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 
                 name: OurnetMutationMethods.add,
@@ -27,7 +27,7 @@ newsViewNewsEvent<MR>(key:keyof T,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, number>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 
                 name: OurnetMutationMethods.news_viewNewsEvent,
@@ -42,7 +42,7 @@ newsViewNewsItem<MR>(key:keyof T,
 args:{ id: string } ,
 mapper?:IDataMapper<MR, number>) {
         
-        return this.addQueryItem(key,
+        return this.queryAddItem(key,
             {
                 
                 name: OurnetMutationMethods.news_viewNewsItem,

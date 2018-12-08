@@ -74,7 +74,7 @@ function generateApi(action: ActionType) {
             return `{ name: '${arg.name}', value: args.${arg.name}, type: '${typeName}' }`;
         });
 
-        const methodBody = `return this.addQueryItem(key,
+        const methodBody = `return this.queryAddItem(key,
             {
                 ${resultIsObject ? 'fields: data.fields,' : ''}
                 name: Ournet${upperAction}Methods.${field.name},
@@ -96,7 +96,7 @@ import { ${uniq(importedTypes).join(', ')} } from './ournet-api-types';
 import { IGraphQlQueryExecutor, ${hasDataField ? 'GraphQlQueryItemInput,' : ''} IDataMapper } from "./graphql";
 
 export class Ournet${upperAction}Api<T> extends GraphQlQuery<T, Ournet${upperAction}Methods> {
-    constructor(executor: IGraphQlQueryExecutor) {
+    constructor(executor: IGraphQlQueryExecutor<Ournet${upperAction}Methods>) {
         super(executor, '${action}');
     }
     ${methods.join('\n\n')}

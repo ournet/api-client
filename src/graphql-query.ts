@@ -8,12 +8,16 @@ export class GraphQlQuery<T extends {}, NT extends string> {
 
     constructor(private executor: IGraphQlQueryExecutor, private type: GraphQlQueryType) { }
 
-    protected addQueryItem(key: keyof T, item: GraphQlQueryItem<NT>) {
+    queryHasItems() {
+        return Object.keys(this.items).length > 0;
+    }
+
+    protected queryAddItem(key: keyof T, item: GraphQlQueryItem<NT>) {
         (<any>this.items)[key] = item;
         return this;
     }
 
-    async execute(): Promise<GraphQlRequestResult<T>> {
+    async queryExecute(): Promise<GraphQlRequestResult<T>> {
         const result = await this.executor.execute<T>(this.type, this.items);
         const keys = Object.keys(this.items);
         for (let key of keys) {
@@ -25,7 +29,3 @@ export class GraphQlQuery<T extends {}, NT extends string> {
         return result;
     }
 }
-
-// export interface GraphQlQueryFactory<T extends GraphQlQuery> {
-//     create(url: string, headers?: Index<string>): T
-// }
