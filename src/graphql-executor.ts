@@ -10,7 +10,7 @@ export type GraphQLQueryExecutorData = {
 }
 
 export class GraphQlQueryExecutor<NT extends string=string> implements IGraphQlQueryExecutor<NT> {
-    constructor(private url: string, private headers: Index<string> = { 'Content-Type': 'application/json' }) { }
+    constructor(private url: string, private headers: Index<string> = { 'Content-Type': 'application/json' }, private timeout: number = 3000) { }
 
     execute<T>(type: GraphQlQueryType, items: GraphQlQueryItems<NT>): Promise<GraphQlRequestResult<T>> {
         // debug(`executing url ${this.url}`);
@@ -24,7 +24,7 @@ export class GraphQlQueryExecutor<NT extends string=string> implements IGraphQlQ
             method: 'POST',
             headers: this.headers,
             body: JSON.stringify(data),
-            timeout: 1000 * 3,
+            timeout: this.timeout,
         });
         return response.json();
     }

@@ -14,8 +14,8 @@ export type CacheGraphQlQueryExecutorOptions = {
 
 export class CacheGraphQlQueryExecutor extends GraphQlQueryExecutor {
     private storage: { [key: string]: LRU.Cache<string, any> } = {}
-    constructor({ url, headers }: { url: string, headers?: Index<string> }, options: CacheGraphQlQueryExecutorOptions) {
-        super(url, headers);
+    constructor({ url, headers, timeout }: { url: string, headers?: Index<string>, timeout?: number }, options: CacheGraphQlQueryExecutorOptions) {
+        super(url, headers, timeout);
         for (let key of Object.keys(options)) {
             this.storage[key] = new LRU({ max: options[key].max, maxAge: options[key].ttl });
         }
@@ -82,6 +82,6 @@ export class CacheGraphQlQueryExecutor extends GraphQlQueryExecutor {
     }
 
     private createItemKey(item: GraphQlQueryItem<string>) {
-        return item.name + '#' + (item.variables ? JSON.stringify(item.variables.map(item=>item.value)) : '') + '#' + item.fields || '';
+        return item.name + '#' + (item.variables ? JSON.stringify(item.variables.map(item => item.value)) : '') + '#' + item.fields || '';
     }
 }
