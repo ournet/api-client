@@ -98,6 +98,8 @@ export type HoroscopePhrase = { id: string, lang: string, source: string, text: 
 
 export type HoroscopeGenerateReportsParams = { lang: string, period: string } 
 
+export type Video = { id: string, sourceId: string, sourceType: string, websites: string[], createdAt: string, expiresAt: number, width?: number, height?: number, countViews: number } 
+
 export type ArticleContentRef = { refId: string, refType: string } 
 
 export const PublicHolidayStringFields = 'date name';
@@ -199,5 +201,7 @@ export const HoroscopeReportStatsStringFields = 'love success health';
 export const HoroscopePhraseStringFields = 'id lang source text length sign period createdAt';
 
 export const HoroscopeGenerateReportsParamsStringFields = 'lang period';
+
+export const VideoStringFields = 'id sourceId sourceType websites createdAt expiresAt width height countViews';
 
 export const ArticleContentRefStringFields = 'refId refType';
