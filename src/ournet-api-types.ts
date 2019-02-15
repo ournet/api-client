@@ -76,11 +76,11 @@ export type QuoteAuthor = { name: string, slug: string, id: string }
 
 export type QuoteTopic = { id: string, name: string, slug: string, abbr?: string, type?: string, rel?: string } 
 
-export type LatestQuotesQueryParams = { lang: string, country: string, maxDate?: string, minDate?: string, limit: number } 
+export type ListQuotesQueryParams = { lang: string, country: string, maxDate?: string, minDate?: string, limit: number } 
 
-export type LatestQuotesByTopicQueryParams = { lang: string, country: string, maxDate?: string, minDate?: string, limit: number, topicId: string } 
+export type ListQuotesByTopicQueryParams = { lang: string, country: string, maxDate?: string, minDate?: string, limit: number, topicId: string } 
 
-export type LatestQuotesByAuthorQueryParams = { lang: string, country: string, maxDate?: string, minDate?: string, limit: number, authorId: string } 
+export type ListQuotesByAuthorQueryParams = { lang: string, country: string, maxDate?: string, minDate?: string, limit: number, authorId: string } 
 
 export type CountQuotesQueryParams = { lang: string, country: string, maxDate?: string, minDate?: string } 
 
@@ -180,11 +180,11 @@ export const QuoteAuthorStringFields = 'name slug id';
 
 export const QuoteTopicStringFields = 'id name slug abbr type rel';
 
-export const LatestQuotesQueryParamsStringFields = 'lang country maxDate minDate limit';
+export const ListQuotesQueryParamsStringFields = 'lang country maxDate minDate limit';
 
-export const LatestQuotesByTopicQueryParamsStringFields = 'lang country maxDate minDate limit topicId';
+export const ListQuotesByTopicQueryParamsStringFields = 'lang country maxDate minDate limit topicId';
 
-export const LatestQuotesByAuthorQueryParamsStringFields = 'lang country maxDate minDate limit authorId';
+export const ListQuotesByAuthorQueryParamsStringFields = 'lang country maxDate minDate limit authorId';
 
 export const CountQuotesQueryParamsStringFields = 'lang country maxDate minDate';
 

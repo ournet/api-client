@@ -16,8 +16,8 @@
     "clean": "rimraf ./lib && rimraf ./types",
     "clean-test-code": "rimraf ./lib/**/*.test.js && rimraf ./types/**/*.test.d.ts",
     "generate-schema": "apollo-codegen introspect-schema http://localhost:41806/graphql --output schema.json",
-    "generate-types": "tsc && node ./lib/scripts/generate-types.js",
-    "generate-api": "tsc && node ./lib/scripts/generate-api.js",
+    "generate-types": "node ./lib/scripts/generate-types.js",
+    "generate-api": "node ./lib/scripts/generate-api.js",
     "generate": "yarn generate-schema && yarn generate-types && yarn generate-api && yarn clean && yarn tsc"
   },
   "engines": {

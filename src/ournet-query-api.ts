@@ -1,6 +1,6 @@
 
 import { GraphQlQuery } from "./graphql-query";
-import { PublicHoliday, InputTimezoneGeoPoint, ForecastReport, DailyForecastDataPoint, HourlyForecastDataPoint, Place, PlaceOldId, NewsItem, NewsSearchParams, LatestNewsQueryParams, LatestNewsBySourceQueryParams, LatestNewsByTopicQueryParams, LatestNewsByEventQueryParams, CountNewsQueryParams, CountNewsBySourceQueryParams, CountNewsByTopicQueryParams, CountNewsByEventQueryParams, NewsTopItem, NewsEvent, LatestEventsQueryParams, LatestEventsByTopicQueryParams, CountEventsQueryParams, CountEventsByTopicQueryParams, TrendingTopicsQueryParams, SimilarEventsByTopicsQueryParams, ArticleContent, Topic, TopicWikiId, Quote, LatestQuotesQueryParams, LatestQuotesByTopicQueryParams, LatestQuotesByAuthorQueryParams, CountQuotesQueryParams, CountQuotesByTopicQueryParams, CountQuotesByAuthorQueryParams, QuoteTopItem, HoroscopeReport, HoroscopePhrase, HoroscopeGenerateReportsParams, Video } from './ournet-api-types';
+import { PublicHoliday, InputTimezoneGeoPoint, ForecastReport, DailyForecastDataPoint, HourlyForecastDataPoint, Place, PlaceOldId, NewsItem, NewsSearchParams, LatestNewsQueryParams, LatestNewsBySourceQueryParams, LatestNewsByTopicQueryParams, LatestNewsByEventQueryParams, CountNewsQueryParams, CountNewsBySourceQueryParams, CountNewsByTopicQueryParams, CountNewsByEventQueryParams, NewsTopItem, NewsEvent, LatestEventsQueryParams, LatestEventsByTopicQueryParams, CountEventsQueryParams, CountEventsByTopicQueryParams, TrendingTopicsQueryParams, SimilarEventsByTopicsQueryParams, ArticleContent, Topic, TopicWikiId, Quote, ListQuotesQueryParams, ListQuotesByTopicQueryParams, ListQuotesByAuthorQueryParams, CountQuotesQueryParams, CountQuotesByTopicQueryParams, CountQuotesByAuthorQueryParams, QuoteTopItem, HoroscopeReport, HoroscopePhrase, HoroscopeGenerateReportsParams, Video } from './ournet-api-types';
 import { IGraphQlQueryExecutor, GraphQlQueryItemInput, IDataMapper } from "./graphql";
 
 export class OurnetQueryApi<T> extends GraphQlQuery<T, OurnetQueryMethods> {
@@ -685,7 +685,7 @@ mapper?:IDataMapper<MR, Quote[]>) {
 
 quotesLatest<MR>(key:keyof T,
 data:GraphQlQueryItemInput,
-args:{ params?: LatestQuotesQueryParams } ,
+args:{ params?: ListQuotesQueryParams } ,
 mapper?:IDataMapper<MR, Quote[]>) {
         
         return this.queryAddItem(key,
@@ -694,14 +694,14 @@ mapper?:IDataMapper<MR, Quote[]>) {
                 name: OurnetQueryMethods.quotes_latest,
                 mapper: mapper,
                 variables: [
-                    { name: 'params', value: args.params, type: 'LatestQuotesQueryParams' }
+                    { name: 'params', value: args.params, type: 'ListQuotesQueryParams' }
                 ]
             })
     }
 
 quotesLatestByTopic<MR>(key:keyof T,
 data:GraphQlQueryItemInput,
-args:{ params?: LatestQuotesByTopicQueryParams } ,
+args:{ params?: ListQuotesByTopicQueryParams } ,
 mapper?:IDataMapper<MR, Quote[]>) {
         
         return this.queryAddItem(key,
@@ -710,14 +710,14 @@ mapper?:IDataMapper<MR, Quote[]>) {
                 name: OurnetQueryMethods.quotes_latestByTopic,
                 mapper: mapper,
                 variables: [
-                    { name: 'params', value: args.params, type: 'LatestQuotesByTopicQueryParams' }
+                    { name: 'params', value: args.params, type: 'ListQuotesByTopicQueryParams' }
                 ]
             })
     }
 
 quotesLatestByAuthor<MR>(key:keyof T,
 data:GraphQlQueryItemInput,
-args:{ params?: LatestQuotesByAuthorQueryParams } ,
+args:{ params?: ListQuotesByAuthorQueryParams } ,
 mapper?:IDataMapper<MR, Quote[]>) {
         
         return this.queryAddItem(key,
@@ -726,7 +726,7 @@ mapper?:IDataMapper<MR, Quote[]>) {
                 name: OurnetQueryMethods.quotes_latestByAuthor,
                 mapper: mapper,
                 variables: [
-                    { name: 'params', value: args.params, type: 'LatestQuotesByAuthorQueryParams' }
+                    { name: 'params', value: args.params, type: 'ListQuotesByAuthorQueryParams' }
                 ]
             })
     }
@@ -778,7 +778,7 @@ mapper?:IDataMapper<MR, number>) {
 
 quotesTopTopics<MR>(key:keyof T,
 data:GraphQlQueryItemInput,
-args:{ params?: LatestQuotesQueryParams } ,
+args:{ params?: ListQuotesQueryParams } ,
 mapper?:IDataMapper<MR, QuoteTopItem[]>) {
         
         return this.queryAddItem(key,
@@ -787,14 +787,14 @@ mapper?:IDataMapper<MR, QuoteTopItem[]>) {
                 name: OurnetQueryMethods.quotes_topTopics,
                 mapper: mapper,
                 variables: [
-                    { name: 'params', value: args.params, type: 'LatestQuotesQueryParams' }
+                    { name: 'params', value: args.params, type: 'ListQuotesQueryParams' }
                 ]
             })
     }
 
 quotesTopAuthors<MR>(key:keyof T,
 data:GraphQlQueryItemInput,
-args:{ params?: LatestQuotesQueryParams } ,
+args:{ params?: ListQuotesQueryParams } ,
 mapper?:IDataMapper<MR, QuoteTopItem[]>) {
         
         return this.queryAddItem(key,
@@ -803,14 +803,14 @@ mapper?:IDataMapper<MR, QuoteTopItem[]>) {
                 name: OurnetQueryMethods.quotes_topAuthors,
                 mapper: mapper,
                 variables: [
-                    { name: 'params', value: args.params, type: 'LatestQuotesQueryParams' }
+                    { name: 'params', value: args.params, type: 'ListQuotesQueryParams' }
                 ]
             })
     }
 
 quotesTopAuthorTopics<MR>(key:keyof T,
 data:GraphQlQueryItemInput,
-args:{ params?: LatestQuotesByAuthorQueryParams } ,
+args:{ params?: ListQuotesByAuthorQueryParams } ,
 mapper?:IDataMapper<MR, QuoteTopItem[]>) {
         
         return this.queryAddItem(key,
@@ -819,7 +819,23 @@ mapper?:IDataMapper<MR, QuoteTopItem[]>) {
                 name: OurnetQueryMethods.quotes_topAuthorTopics,
                 mapper: mapper,
                 variables: [
-                    { name: 'params', value: args.params, type: 'LatestQuotesByAuthorQueryParams' }
+                    { name: 'params', value: args.params, type: 'ListQuotesByAuthorQueryParams' }
+                ]
+            })
+    }
+
+quotesPopularByAuthor<MR>(key:keyof T,
+data:GraphQlQueryItemInput,
+args:{ params?: ListQuotesByAuthorQueryParams } ,
+mapper?:IDataMapper<MR, Quote[]>) {
+        
+        return this.queryAddItem(key,
+            {
+                fields: data.fields,
+                name: OurnetQueryMethods.quotes_popularByAuthor,
+                mapper: mapper,
+                variables: [
+                    { name: 'params', value: args.params, type: 'ListQuotesByAuthorQueryParams' }
                 ]
             })
     }
@@ -974,6 +990,7 @@ export enum OurnetQueryMethods {
     quotes_topTopics = "quotes_topTopics",
     quotes_topAuthors = "quotes_topAuthors",
     quotes_topAuthorTopics = "quotes_topAuthorTopics",
+    quotes_popularByAuthor = "quotes_popularByAuthor",
     horoscopes_reportById = "horoscopes_reportById",
     horoscopes_reportsByIds = "horoscopes_reportsByIds",
     horoscopes_phraseById = "horoscopes_phraseById",

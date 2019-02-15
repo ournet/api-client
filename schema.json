@@ -1466,7 +1466,7 @@
                   "description": "",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "LatestQuotesQueryParams",
+                    "name": "ListQuotesQueryParams",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -1497,7 +1497,7 @@
                   "description": "",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "LatestQuotesByTopicQueryParams",
+                    "name": "ListQuotesByTopicQueryParams",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -1528,7 +1528,7 @@
                   "description": "",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "LatestQuotesByAuthorQueryParams",
+                    "name": "ListQuotesByAuthorQueryParams",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -1640,7 +1640,7 @@
                   "description": "",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "LatestQuotesQueryParams",
+                    "name": "ListQuotesQueryParams",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -1671,7 +1671,7 @@
                   "description": "",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "LatestQuotesQueryParams",
+                    "name": "ListQuotesQueryParams",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -1702,7 +1702,7 @@
                   "description": "",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "LatestQuotesByAuthorQueryParams",
+                    "name": "ListQuotesByAuthorQueryParams",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -1717,6 +1717,37 @@
                   "ofType": {
                     "kind": "OBJECT",
                     "name": "QuoteTopItem",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "quotes_popularByAuthor",
+              "description": "",
+              "args": [
+                {
+                  "name": "params",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "ListQuotesByAuthorQueryParams",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Quote",
                     "ofType": null
                   }
                 }
@@ -6909,7 +6940,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "LatestQuotesQueryParams",
+          "name": "ListQuotesQueryParams",
           "description": "",
           "fields": null,
           "inputFields": [
@@ -6982,7 +7013,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "LatestQuotesByTopicQueryParams",
+          "name": "ListQuotesByTopicQueryParams",
           "description": "",
           "fields": null,
           "inputFields": [
@@ -7069,7 +7100,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "LatestQuotesByAuthorQueryParams",
+          "name": "ListQuotesByAuthorQueryParams",
           "description": "",
           "fields": null,
           "inputFields": [
