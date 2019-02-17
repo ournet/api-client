@@ -4,3 +4,4 @@ export * from './ournet-api-types';
 export { OurnetMutationApi, OurnetMutationMethods } from './ournet-mutation-api';
 export { OurnetQueryApi, OurnetQueryMethods } from './ournet-query-api';
 export { CacheGraphQlQueryExecutor, CacheGraphQlQueryExecutorOptions } from './cache-graphql-executor';
+export { GraphQlQueryExecutor } from './graphql-executor';

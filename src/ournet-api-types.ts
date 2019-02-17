@@ -68,13 +68,15 @@ export type Topic = { id: string, lang: string, country: string, wikiId?: string
 
 export type TopicWikiId = { lang: string, country: string, wikiId: string } 
 
-export type Quote = { id: string, lang: string, country: string, source: QuoteSource, author: QuoteAuthor, text: string, topics?: QuoteTopic[], lastFoundAt: string, createdAt: string, expiresAt: number, countViews: number } 
+export type Quote = { id: string, lang: string, country: string, source: QuoteSource, author: QuoteAuthor, text: string, topics?: QuoteTopic[], lastFoundAt: string, createdAt: string, expiresAt: number, countViews: number, events?: QuoteEvent[] } 
 
-export type QuoteSource = { host: string, path: string, title: string, id?: string } 
+export type QuoteSource = { host: string, path: string, title: string, id: string, imageId?: string } 
 
 export type QuoteAuthor = { name: string, slug: string, id: string } 
 
 export type QuoteTopic = { id: string, name: string, slug: string, abbr?: string, type?: string, rel?: string } 
+
+export type QuoteEvent = { title: string, id: string, imageId?: string } 
 
 export type ListQuotesQueryParams = { lang: string, country: string, maxDate?: string, minDate?: string, limit: number } 
 
@@ -172,13 +174,15 @@ export const TopicStringFields = 'id lang country wikiId name commonName english
 
 export const TopicWikiIdStringFields = 'lang country wikiId';
 
-export const QuoteStringFields = 'id lang country source { host path title id } author { name slug id } text topics { id name slug abbr type rel } lastFoundAt createdAt expiresAt countViews';
+export const QuoteStringFields = 'id lang country source { host path title id imageId } author { name slug id } text topics { id name slug abbr type rel } lastFoundAt createdAt expiresAt countViews events { title id imageId }';
 
-export const QuoteSourceStringFields = 'host path title id';
+export const QuoteSourceStringFields = 'host path title id imageId';
 
 export const QuoteAuthorStringFields = 'name slug id';
 
 export const QuoteTopicStringFields = 'id name slug abbr type rel';
+
+export const QuoteEventStringFields = 'title id imageId';
 
 export const ListQuotesQueryParamsStringFields = 'lang country maxDate minDate limit';
 
