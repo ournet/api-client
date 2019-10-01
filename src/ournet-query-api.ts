@@ -935,6 +935,21 @@ mapper?:IDataMapper<MR, Video[]>) {
                 ]
             })
     }
+
+cocoshelUnsubsribe<MR>(key:keyof T,
+args:{ id: string } ,
+mapper?:IDataMapper<MR, boolean>) {
+        
+        return this.queryAddItem(key,
+            {
+                
+                name: OurnetQueryMethods.cocoshel_unsubsribe,
+                mapper: mapper,
+                variables: [
+                    { name: 'id', value: args.id, type: 'String!' }
+                ]
+            })
+    }
 }
     
 
@@ -996,5 +1011,6 @@ export enum OurnetQueryMethods {
     horoscopes_phraseById = "horoscopes_phraseById",
     horoscopes_generateReports = "horoscopes_generateReports",
     videos_videoById = "videos_videoById",
-    videos_videosByIds = "videos_videosByIds"
+    videos_videosByIds = "videos_videosByIds",
+    cocoshel_unsubsribe = "cocoshel_unsubsribe"
 }
