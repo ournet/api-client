@@ -92,13 +92,15 @@ export type CountQuotesByAuthorQueryParams = { lang: string, country: string, ma
 
 export type QuoteTopItem = { id: string, count: number } 
 
-export type HoroscopeReport = { id: string, lang: string, text: string, length: number, sign: number, period: string, phrasesIds: string[], numbers: number[], stats: HoroscopeReportStats, createdAt: string, expiresAt: number } 
+export type HoroscopeReport = { id: string, lang: string, text: string, length: number, sign: number, period: string, phrasesIds: string[], phrases: HoroscopePhrase[], numbers: number[], stats: HoroscopeReportStats, createdAt: string, expiresAt: number } 
+
+export type HoroscopePhrase = { iid?: number, id: string, lang: string, source: string, text: string, length: number, sign: number, period: string, createdAt: string } 
 
 export type HoroscopeReportStats = { love: number, success: number, health: number } 
 
-export type HoroscopePhrase = { id: string, lang: string, source: string, text: string, length: number, sign: number, period: string, createdAt: string } 
-
 export type HoroscopeGenerateReportsParams = { lang: string, period: string } 
+
+export type HoroscopeListPhraseParams = { lang: string, limit: number, offset?: number } 
 
 export type Video = { id: string, sourceId: string, sourceType: string, websites: string[], createdAt: string, expiresAt: number, width?: number, height?: number, countViews: number } 
 
@@ -198,13 +200,15 @@ export const CountQuotesByAuthorQueryParamsStringFields = 'lang country maxDate 
 
 export const QuoteTopItemStringFields = 'id count';
 
-export const HoroscopeReportStringFields = 'id lang text length sign period phrasesIds numbers stats { love success health } createdAt expiresAt';
+export const HoroscopeReportStringFields = 'id lang text length sign period phrasesIds phrases { iid id lang source text length sign period createdAt } numbers stats { love success health } createdAt expiresAt';
+
+export const HoroscopePhraseStringFields = 'iid id lang source text length sign period createdAt';
 
 export const HoroscopeReportStatsStringFields = 'love success health';
 
-export const HoroscopePhraseStringFields = 'id lang source text length sign period createdAt';
-
 export const HoroscopeGenerateReportsParamsStringFields = 'lang period';
+
+export const HoroscopeListPhraseParamsStringFields = 'lang limit offset';
 
 export const VideoStringFields = 'id sourceId sourceType websites createdAt expiresAt width height countViews';
 

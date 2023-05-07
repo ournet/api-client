@@ -1,6 +1,6 @@
 
 import { GraphQlQuery } from "./graphql-query";
-import { PublicHoliday, InputTimezoneGeoPoint, ForecastReport, DailyForecastDataPoint, HourlyForecastDataPoint, Place, PlaceOldId, NewsItem, NewsSearchParams, LatestNewsQueryParams, LatestNewsBySourceQueryParams, LatestNewsByTopicQueryParams, LatestNewsByEventQueryParams, CountNewsQueryParams, CountNewsBySourceQueryParams, CountNewsByTopicQueryParams, CountNewsByEventQueryParams, NewsTopItem, NewsEvent, LatestEventsQueryParams, LatestEventsByTopicQueryParams, CountEventsQueryParams, CountEventsByTopicQueryParams, TrendingTopicsQueryParams, SimilarEventsByTopicsQueryParams, ArticleContent, Topic, TopicWikiId, Quote, ListQuotesQueryParams, ListQuotesByTopicQueryParams, ListQuotesByAuthorQueryParams, CountQuotesQueryParams, CountQuotesByTopicQueryParams, CountQuotesByAuthorQueryParams, QuoteTopItem, HoroscopeReport, HoroscopePhrase, HoroscopeGenerateReportsParams, Video } from './ournet-api-types';
+import { PublicHoliday, InputTimezoneGeoPoint, ForecastReport, DailyForecastDataPoint, HourlyForecastDataPoint, Place, PlaceOldId, NewsItem, NewsSearchParams, LatestNewsQueryParams, LatestNewsBySourceQueryParams, LatestNewsByTopicQueryParams, LatestNewsByEventQueryParams, CountNewsQueryParams, CountNewsBySourceQueryParams, CountNewsByTopicQueryParams, CountNewsByEventQueryParams, NewsTopItem, NewsEvent, LatestEventsQueryParams, LatestEventsByTopicQueryParams, CountEventsQueryParams, CountEventsByTopicQueryParams, TrendingTopicsQueryParams, SimilarEventsByTopicsQueryParams, ArticleContent, Topic, TopicWikiId, Quote, ListQuotesQueryParams, ListQuotesByTopicQueryParams, ListQuotesByAuthorQueryParams, CountQuotesQueryParams, CountQuotesByTopicQueryParams, CountQuotesByAuthorQueryParams, QuoteTopItem, HoroscopeReport, HoroscopePhrase, HoroscopeGenerateReportsParams, HoroscopeListPhraseParams, Video } from './ournet-api-types';
 import { IGraphQlQueryExecutor, GraphQlQueryItemInput, IDataMapper } from "./graphql";
 
 export class OurnetQueryApi<T> extends GraphQlQuery<T, OurnetQueryMethods> {
@@ -904,6 +904,22 @@ mapper?:IDataMapper<MR, HoroscopeReport[]>) {
             })
     }
 
+horoscopesPhraseList<MR>(key:keyof T,
+data:GraphQlQueryItemInput,
+args:{ params: HoroscopeListPhraseParams } ,
+mapper?:IDataMapper<MR, HoroscopePhrase[]>) {
+        
+        return this.queryAddItem(key,
+            {
+                fields: data.fields,
+                name: OurnetQueryMethods.horoscopes_phraseList,
+                mapper: mapper,
+                variables: [
+                    { name: 'params', value: args.params, type: 'HoroscopeListPhraseParams!' }
+                ]
+            })
+    }
+
 videosVideoById<MR>(key:keyof T,
 data:GraphQlQueryItemInput,
 args:{ id: string } ,
@@ -1010,6 +1026,7 @@ export enum OurnetQueryMethods {
     horoscopes_reportsByIds = "horoscopes_reportsByIds",
     horoscopes_phraseById = "horoscopes_phraseById",
     horoscopes_generateReports = "horoscopes_generateReports",
+    horoscopes_phraseList = "horoscopes_phraseList",
     videos_videoById = "videos_videoById",
     videos_videosByIds = "videos_videosByIds",
     cocoshel_unsubsribe = "cocoshel_unsubsribe"
