@@ -1,9 +1,26 @@
 
-import { saveCodeFile, GeneratedInfo, getSchema, getTypeByName, getJsTypeName, generateTypeScriptType, typeIsRequired, TypeData, typeIsObject, getTypeName } from "./common";
+import { saveCodeFile, GeneratedInfo, getSchema, getTypeByName, getJsTypeName, generateTypeScriptType, typeIsRequired, TypeData, typeIsObject, getTypeName, typeIsEnum } from "./common";
 
 export function generate() {
 
     saveCodeFile([generateTypes()], 'ournet-api-types');
+}
+
+function generateEnums(): GeneratedInfo {
+    const schema = getSchema();
+    const typeNames = (<any[]>schema.data.__schema.types).map<TypeData>((t: any) => getTypeByName(t.name))
+        .filter(type => typeIsEnum(type));
+
+    const types = typeNames.map(name => getTypeByName(name.name));
+
+    let data = types
+        .map(item => ({
+            name: item.name,
+            fields: ((item.enumValues||[])).map(field => ({ name: field.name }))
+        }))
+        .map(item => `export enum ${item.name} { ${item.fields.map(f => `${f.name} = "${f.name}"`).join(',\n')} }`);
+
+    return { data: data.join('\n\n'), name: null };
 }
 
 function generateTypes(): GeneratedInfo {
@@ -22,7 +39,9 @@ function generateTypes(): GeneratedInfo {
 
     data = data.concat(types.map(type => `export const ${type.name}StringFields = '${getTypeStringFields(type)}';`));
 
-    return { data: data.join('\n\n'), name: null };
+    const enums = generateEnums();
+
+    return { data: data.join('\n\n') + enums.data, name: null };
 }
 
 function getTypeStringFields(type: TypeData, parent: { [name: string]: number } = {}): string {

@@ -75,6 +75,13 @@ export function typeIsObject(type: TypeData) {
     return name.indexOf('__') !== 0 && invalidNames.indexOf(name) < 0 && ['OBJECT', 'INPUT_OBJECT'].indexOf(kind) > -1;
 }
 
+export function typeIsEnum(type: TypeData) {
+    const invalidNames: string[] = [schema.data.__schema['queryType'].name, schema.data.__schema['mutationType'].name];
+    const name = getTypeName(type);
+    const kind = getTypeKind(type);
+    return name.indexOf('__') !== 0 && invalidNames.indexOf(name) < 0 && ['ENUM'].indexOf(kind) > -1;
+}
+
 export type GeneratedInfo = {
     name: string
     data: string
@@ -85,7 +92,12 @@ export type TypeData = {
     name: string
     fields?: TypeFieldData[]
     inputFields?: TypeFieldData[]
+    enumValues?: EnumFieldData[]
     ofType?: TypeData
+}
+
+export type EnumFieldData = {
+    name: string
 }
 
 export type TypeFieldData = {

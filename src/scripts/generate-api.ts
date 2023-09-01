@@ -1,5 +1,5 @@
 import { startWithUpperCase, uniq } from "../utils";
-import { getSchema, saveCodeFile, ActionType, getTypeByName, generateTypeScriptType, typeIsRequired, getTypeName, typeIsList, GeneratedInfo, TypeData, getJsTypeName, typeIsObject } from "./common";
+import { getSchema, saveCodeFile, ActionType, getTypeByName, generateTypeScriptType, typeIsRequired, getTypeName, typeIsList, GeneratedInfo, TypeData, getJsTypeName, typeIsObject, typeIsEnum } from "./common";
 
 export function generate() {
 
@@ -37,7 +37,7 @@ function generateApi(action: ActionType) {
             name: 'args',
             type: generateTypeScriptType(field.args.map(arg => {
                 const typeName = getJsTypeName(arg.type);
-                if (typeIsObject(arg.type)) {
+                if (typeIsObject(arg.type) || typeIsEnum(arg.type)) {
                     importedTypes.push(getTypeName(arg.type));
                 }
                 return { name: arg.name, type: typeName, required: typeIsRequired(arg.type) };
@@ -49,7 +49,7 @@ function generateApi(action: ActionType) {
 
 
         const resultJsType = getJsTypeName(field.type);
-        if (typeIsObject(field.type)) {
+        if (typeIsObject(field.type) || typeIsEnum(field.type)) {
             importedTypes.push(getTypeName(field.type));
         }
 

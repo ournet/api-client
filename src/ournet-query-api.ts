@@ -1,6 +1,6 @@
 
 import { GraphQlQuery } from "./graphql-query";
-import { PublicHoliday, InputTimezoneGeoPoint, ForecastReport, DailyForecastDataPoint, HourlyForecastDataPoint, Place, PlaceOldId, NewsItem, NewsSearchParams, LatestNewsQueryParams, LatestNewsBySourceQueryParams, LatestNewsByTopicQueryParams, LatestNewsByEventQueryParams, CountNewsQueryParams, CountNewsBySourceQueryParams, CountNewsByTopicQueryParams, CountNewsByEventQueryParams, NewsTopItem, NewsEvent, LatestEventsQueryParams, LatestEventsByTopicQueryParams, CountEventsQueryParams, CountEventsByTopicQueryParams, TrendingTopicsQueryParams, SimilarEventsByTopicsQueryParams, ArticleContent, Topic, TopicWikiId, Quote, ListQuotesQueryParams, ListQuotesByTopicQueryParams, ListQuotesByAuthorQueryParams, CountQuotesQueryParams, CountQuotesByTopicQueryParams, CountQuotesByAuthorQueryParams, QuoteTopItem, HoroscopeReport, HoroscopePhrase, HoroscopeGenerateReportsParams, HoroscopeListPhraseParams, Video } from './ournet-api-types';
+import { PublicHoliday, InputTimezoneGeoPoint, ForecastReport, DailyForecastDataPoint, HourlyForecastDataPoint, Place, PlaceOldId, NewsItem, NewsSearchParams, LatestNewsQueryParams, LatestNewsBySourceQueryParams, LatestNewsByTopicQueryParams, LatestNewsByEventQueryParams, CountNewsQueryParams, CountNewsBySourceQueryParams, CountNewsByTopicQueryParams, CountNewsByEventQueryParams, NewsTopItem, NewsEvent, LatestEventsQueryParams, LatestEventsByTopicQueryParams, CountEventsQueryParams, CountEventsByTopicQueryParams, TrendingTopicsQueryParams, SimilarEventsByTopicsQueryParams, NewsArticleContent, Topic, TopicWikiId, Quote, ListQuotesQueryParams, ListQuotesByTopicQueryParams, ListQuotesByAuthorQueryParams, CountQuotesQueryParams, CountQuotesByTopicQueryParams, CountQuotesByAuthorQueryParams, QuoteTopItem, HoroscopeReport, HoroscopePhrase, HoroscopeGenerateReportsParams, HoroscopeListPhraseParams, Video, Article, ArticleType, ArticleStatus, Image } from './ournet-api-types';
 import { IGraphQlQueryExecutor, GraphQlQueryItemInput, IDataMapper } from "./graphql";
 
 export class OurnetQueryApi<T> extends GraphQlQuery<T, OurnetQueryMethods> {
@@ -574,7 +574,7 @@ mapper?:IDataMapper<MR, NewsEvent[]>) {
 newsArticleContentById<MR>(key:keyof T,
 data:GraphQlQueryItemInput,
 args:{ id: string } ,
-mapper?:IDataMapper<MR, ArticleContent>) {
+mapper?:IDataMapper<MR, NewsArticleContent>) {
         
         return this.queryAddItem(key,
             {
@@ -590,7 +590,7 @@ mapper?:IDataMapper<MR, ArticleContent>) {
 newsArticleContentsByIds<MR>(key:keyof T,
 data:GraphQlQueryItemInput,
 args:{ ids: string[] } ,
-mapper?:IDataMapper<MR, ArticleContent[]>) {
+mapper?:IDataMapper<MR, NewsArticleContent[]>) {
         
         return this.queryAddItem(key,
             {
@@ -966,6 +966,75 @@ mapper?:IDataMapper<MR, boolean>) {
                 ]
             })
     }
+
+articleById<MR>(key:keyof T,
+data:GraphQlQueryItemInput,
+args:{ id: string } ,
+mapper?:IDataMapper<MR, Article>) {
+        
+        return this.queryAddItem(key,
+            {
+                fields: data.fields,
+                name: OurnetQueryMethods.articleById,
+                mapper: mapper,
+                variables: [
+                    { name: 'id', value: args.id, type: 'String!' }
+                ]
+            })
+    }
+
+articleByIds<MR>(key:keyof T,
+data:GraphQlQueryItemInput,
+args:{ ids: string[] } ,
+mapper?:IDataMapper<MR, Article[]>) {
+        
+        return this.queryAddItem(key,
+            {
+                fields: data.fields,
+                name: OurnetQueryMethods.articleByIds,
+                mapper: mapper,
+                variables: [
+                    { name: 'ids', value: args.ids, type: '[String]!' }
+                ]
+            })
+    }
+
+findArticle<MR>(key:keyof T,
+data:GraphQlQueryItemInput,
+args:{ lang: string, country: string, type?: ArticleType, status?: ArticleStatus, limit: number, offset?: number } ,
+mapper?:IDataMapper<MR, Article[]>) {
+        
+        return this.queryAddItem(key,
+            {
+                fields: data.fields,
+                name: OurnetQueryMethods.findArticle,
+                mapper: mapper,
+                variables: [
+                    { name: 'lang', value: args.lang, type: 'String!' },
+{ name: 'country', value: args.country, type: 'String!' },
+{ name: 'type', value: args.type, type: 'ArticleType' },
+{ name: 'status', value: args.status, type: 'ArticleStatus' },
+{ name: 'limit', value: args.limit, type: 'Int!' },
+{ name: 'offset', value: args.offset, type: 'Int' }
+                ]
+            })
+    }
+
+imageById<MR>(key:keyof T,
+data:GraphQlQueryItemInput,
+args:{ id: string } ,
+mapper?:IDataMapper<MR, Image>) {
+        
+        return this.queryAddItem(key,
+            {
+                fields: data.fields,
+                name: OurnetQueryMethods.imageById,
+                mapper: mapper,
+                variables: [
+                    { name: 'id', value: args.id, type: 'String!' }
+                ]
+            })
+    }
 }
     
 
@@ -1029,5 +1098,9 @@ export enum OurnetQueryMethods {
     horoscopes_phraseList = "horoscopes_phraseList",
     videos_videoById = "videos_videoById",
     videos_videosByIds = "videos_videosByIds",
-    cocoshel_unsubsribe = "cocoshel_unsubsribe"
+    cocoshel_unsubsribe = "cocoshel_unsubsribe",
+    articleById = "articleById",
+    articleByIds = "articleByIds",
+    findArticle = "findArticle",
+    imageById = "imageById"
 }

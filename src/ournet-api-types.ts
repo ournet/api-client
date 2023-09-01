@@ -62,7 +62,7 @@ export type TrendingTopicsQueryParams = { lang: string, country: string, limit: 
 
 export type SimilarEventsByTopicsQueryParams = { lang: string, country: string, minDate?: string, maxDate?: string, limit: number, topicIds: string[], exceptId?: string } 
 
-export type ArticleContent = { id: string, refId: string, refType: string, content: string, format: string, formatVersion?: number, topicsMap?: any, expiresAt: number, createdAt: string, updatedAt?: string } 
+export type NewsArticleContent = { id: string, refId: string, refType: string, content: string, format: string, formatVersion?: number, topicsMap?: any, expiresAt: number, createdAt: string, updatedAt?: string } 
 
 export type Topic = { id: string, lang: string, country: string, wikiId?: string, name: string, commonName?: string, englishName?: string, abbr?: string, type?: string, description?: string, about?: string, isActive?: boolean, createdAt: string, updatedAt?: string } 
 
@@ -104,7 +104,13 @@ export type HoroscopeListPhraseParams = { lang: string, limit: number, offset?: 
 
 export type Video = { id: string, sourceId: string, sourceType: string, websites: string[], createdAt: string, expiresAt: number, width?: number, height?: number, countViews: number } 
 
-export type ArticleContentRef = { refId: string, refType: string } 
+export type Article = { id: string, lang: string, country: string, projectKey: string, type: ArticleType, title: string, slug: string, status: ArticleStatus, description?: string, imageId?: string, client: string, countViews: number, expiresAt?: string, createdAt: string, updatedAt: string, content?: ArticleContent } 
+
+export type ArticleContent = { id: string, format: ArticleContentFormat, content: string, createdAt: string, updatedAt: string } 
+
+export type Image = { id: string, contentType: string, length: number, width: number, height: number, createdAt: string, updatedAt: string } 
+
+export type NewsArticleContentRef = { refId: string, refType: string } 
 
 export const PublicHolidayStringFields = 'date name';
 
@@ -170,7 +176,7 @@ export const TrendingTopicsQueryParamsStringFields = 'lang country limit period'
 
 export const SimilarEventsByTopicsQueryParamsStringFields = 'lang country minDate maxDate limit topicIds exceptId';
 
-export const ArticleContentStringFields = 'id refId refType content format formatVersion topicsMap expiresAt createdAt updatedAt';
+export const NewsArticleContentStringFields = 'id refId refType content format formatVersion topicsMap expiresAt createdAt updatedAt';
 
 export const TopicStringFields = 'id lang country wikiId name commonName englishName abbr type description about isActive createdAt updatedAt';
 
@@ -212,4 +218,49 @@ export const HoroscopeListPhraseParamsStringFields = 'lang limit offset';
 
 export const VideoStringFields = 'id sourceId sourceType websites createdAt expiresAt width height countViews';
 
-export const ArticleContentRefStringFields = 'refId refType';
+export const ArticleStringFields = 'id lang country projectKey type title slug status description imageId client countViews expiresAt createdAt updatedAt content { id format content createdAt updatedAt }';
+
+export const ArticleContentStringFields = 'id format content createdAt updatedAt';
+
+export const ImageStringFields = 'id contentType length width height createdAt updatedAt';
+
+export const NewsArticleContentRefStringFields = 'refId refType';export enum ArticleType { SPONSORED = "SPONSORED" }
+
+export enum ArticleStatus { ACTIVE = "ACTIVE",
+INACTIVE = "INACTIVE" }
+
+export enum ArticleContentFormat { MD = "MD" }
+
+export enum TopicType { PLACE = "PLACE",
+ORG = "ORG",
+PERSON = "PERSON",
+WORK = "WORK",
+EVENT = "EVENT" }
+
+export enum NewsTopicType { PERSON = "PERSON",
+ORG = "ORG",
+PLACE = "PLACE",
+PRODUCT = "PRODUCT",
+WORK = "WORK",
+EVENT = "EVENT" }
+
+export enum NewsEventStatus { ADULT = "ADULT" }
+
+export enum NewsArticleContentFormat { text = "text",
+md = "md",
+json = "json" }
+
+export enum NewsArticleContentRefType { NEWS = "NEWS",
+EVENT = "EVENT" }
+
+export enum QuoteTopicType { PERSON = "PERSON",
+ORG = "ORG",
+PLACE = "PLACE",
+PRODUCT = "PRODUCT",
+WORK = "WORK",
+EVENT = "EVENT" }
+
+export enum QuoteTopicRelation { MENTION = "MENTION" }
+
+export enum CacheControlScope { PUBLIC = "PUBLIC",
+PRIVATE = "PRIVATE" }
