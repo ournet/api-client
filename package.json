@@ -1,6 +1,6 @@
 {
   "name": "@ournet/api-client",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Ournet api client",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",

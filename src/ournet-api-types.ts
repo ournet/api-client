@@ -104,7 +104,7 @@ export type HoroscopeListPhraseParams = { lang: string, limit: number, offset?: 
 
 export type Video = { id: string, sourceId: string, sourceType: string, websites: string[], createdAt: string, expiresAt: number, width?: number, height?: number, countViews: number } 
 
-export type Article = { id: string, lang: string, country: string, projectKey: string, type: ArticleType, title: string, slug: string, status: ArticleStatus, description?: string, imageId?: string, client: string, countViews: number, expiresAt?: string, createdAt: string, updatedAt: string, content?: ArticleContent } 
+export type Article = { id: string, lang: string, country: string, projectKey: string, type: ArticleType, title: string, slug: string, status: ArticleStatus, description?: string, imageId?: string, client: string, countViews: number, expiresAt?: string, createdAt: string, updatedAt: string, doFollowLinks?: boolean, totalCost?: number, currency?: string, content?: ArticleContent } 
 
 export type ArticleContent = { id: string, format: ArticleContentFormat, content: string, createdAt: string, updatedAt: string } 
 
@@ -218,7 +218,7 @@ export const HoroscopeListPhraseParamsStringFields = 'lang limit offset';
 
 export const VideoStringFields = 'id sourceId sourceType websites createdAt expiresAt width height countViews';
 
-export const ArticleStringFields = 'id lang country projectKey type title slug status description imageId client countViews expiresAt createdAt updatedAt content { id format content createdAt updatedAt }';
+export const ArticleStringFields = 'id lang country projectKey type title slug status description imageId client countViews expiresAt createdAt updatedAt doFollowLinks totalCost currency content { id format content createdAt updatedAt }';
 
 export const ArticleContentStringFields = 'id format content createdAt updatedAt';
 

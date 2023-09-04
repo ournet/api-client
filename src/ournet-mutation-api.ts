@@ -87,7 +87,7 @@ mapper?:IDataMapper<MR, number>) {
 
 createArticle<MR>(key:keyof T,
 data:GraphQlQueryItemInput,
-args:{ lang: string, country: string, type: ArticleType, title: string, status: ArticleStatus, description?: string, imageId?: string, client: string, content: string, format: ArticleContentFormat } ,
+args:{ lang: string, country: string, type: ArticleType, title: string, status: ArticleStatus, description?: string, imageId?: string, client: string, content: string, format: ArticleContentFormat, doFollowLinks?: boolean, totalCost?: number, currency?: string } ,
 mapper?:IDataMapper<MR, Article>) {
         
         return this.queryAddItem(key,
@@ -105,7 +105,37 @@ mapper?:IDataMapper<MR, Article>) {
 { name: 'imageId', value: args.imageId, type: 'String' },
 { name: 'client', value: args.client, type: 'String!' },
 { name: 'content', value: args.content, type: 'String!' },
-{ name: 'format', value: args.format, type: 'ArticleContentFormat!' }
+{ name: 'format', value: args.format, type: 'ArticleContentFormat!' },
+{ name: 'doFollowLinks', value: args.doFollowLinks, type: 'Boolean' },
+{ name: 'totalCost', value: args.totalCost, type: 'Float' },
+{ name: 'currency', value: args.currency, type: 'String' }
+                ]
+            })
+    }
+
+updateArticle<MR>(key:keyof T,
+data:GraphQlQueryItemInput,
+args:{ id: string, type?: ArticleType, title?: string, status?: ArticleStatus, description?: string, imageId?: string, client?: string, content?: string, format?: ArticleContentFormat, doFollowLinks?: boolean, totalCost?: number, currency?: string } ,
+mapper?:IDataMapper<MR, Article>) {
+        
+        return this.queryAddItem(key,
+            {
+                fields: data.fields,
+                name: OurnetMutationMethods.updateArticle,
+                mapper: mapper,
+                variables: [
+                    { name: 'id', value: args.id, type: 'String!' },
+{ name: 'type', value: args.type, type: 'ArticleType' },
+{ name: 'title', value: args.title, type: 'String' },
+{ name: 'status', value: args.status, type: 'ArticleStatus' },
+{ name: 'description', value: args.description, type: 'String' },
+{ name: 'imageId', value: args.imageId, type: 'String' },
+{ name: 'client', value: args.client, type: 'String' },
+{ name: 'content', value: args.content, type: 'String' },
+{ name: 'format', value: args.format, type: 'ArticleContentFormat' },
+{ name: 'doFollowLinks', value: args.doFollowLinks, type: 'Boolean' },
+{ name: 'totalCost', value: args.totalCost, type: 'Float' },
+{ name: 'currency', value: args.currency, type: 'String' }
                 ]
             })
     }
@@ -151,6 +181,7 @@ export enum OurnetMutationMethods {
     topics_setTopicType = "topics_setTopicType",
     viewArticle = "viewArticle",
     createArticle = "createArticle",
+    updateArticle = "updateArticle",
     deleteArticle = "deleteArticle",
     createImage = "createImage"
 }
